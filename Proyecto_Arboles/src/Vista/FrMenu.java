@@ -44,6 +44,9 @@ public class FrMenu extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCoincidences = new javax.swing.JTable();
+        btnLoadData = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,14 +59,14 @@ public class FrMenu extends javax.swing.JFrame {
         lbTitle.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lbTitle.setText("Proyecto Árboles");
 
-        lbQuestionTree.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        lbQuestionTree.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbQuestionTree.setText("¿Qué tipo de árbol desea?");
 
         optionesTree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Árbol AB", "Árbol AVL", "Árbol B" }));
 
         btnCreateTree.setText("Crear árbol");
 
-        lbQuestionSearch.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        lbQuestionSearch.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbQuestionSearch.setText("¿Cómo desea realizar su búsqueda?");
 
         btnSearch.setText("Buscar");
@@ -80,6 +83,11 @@ public class FrMenu extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tbCoincidences);
+
+        btnLoadData.setText("Cargar datos");
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel1.setText("Ingrese su búsqueda:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,32 +106,43 @@ public class FrMenu extends javax.swing.JFrame {
                             .addComponent(lbQuestionSearch)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbDegree)
+                            .addComponent(rbName)
+                            .addComponent(rbAverage)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSearch)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(rbDegree)
-                                .addComponent(rbName)
-                                .addComponent(rbAverage)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                            .addComponent(jLabel1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbTitle)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbTitle)
+                        .addGap(318, 318, 318))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnLoadData)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbQuestionTree)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCreateTree)
-                            .addComponent(optionesTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                        .addGap(34, 34, 34)
+                        .addComponent(lbQuestionTree))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(btnLoadData)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(optionesTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCreateTree))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addComponent(lbQuestionSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbName)
@@ -131,10 +150,16 @@ public class FrMenu extends javax.swing.JFrame {
                         .addComponent(rbAverage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbDegree)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnSearch))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btnSearch)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,7 +202,9 @@ public class FrMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateTree;
+    private javax.swing.JButton btnLoadData;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbQuestionSearch;
     private javax.swing.JLabel lbQuestionTree;
@@ -188,5 +215,6 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbName;
     private javax.swing.ButtonGroup searchOptions;
     private javax.swing.JTable tbCoincidences;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
