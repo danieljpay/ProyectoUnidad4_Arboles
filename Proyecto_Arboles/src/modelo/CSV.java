@@ -11,9 +11,12 @@ import java.util.Arrays;
  * @author plupy
  */
 public class CSV {
-    public void readCSV(String ruta) throws IOException{
+    public void readCSV(String ruta, ArrayList<Egresado> destino) throws IOException{
         /*  fuente:  thttp://www.programandoapasitos.com/2017/04/como-leer-fichero-csv-con-java.htmlhtp://www.programandoapasitos.com/2017/04/como-leer-fichero-csv-con-java.html */
         String separator = ",";
+        String nombre;
+        String profesion;
+        float promedio;
         BufferedReader bufferLectura = null;
         try{
             //abrir el .csv en buffer de lectura
@@ -21,12 +24,15 @@ public class CSV {
             
             //leer una linea del archivo
             String linea = bufferLectura.readLine();
+            linea = bufferLectura.readLine();
             
             while (linea != null) {
                 //separar la linea leída con el separador definido previamente
                 String[] campos = linea.split(separator);
-                System.out.println(Arrays.toString(campos));   
-                
+                nombre = campos[0];
+                profesion = campos[1];
+                promedio = Float.parseFloat(campos[2]);
+                destino.add(new Egresado(nombre, profesion, promedio));
                 //volver a leer otra línea del fichero
                 linea = bufferLectura.readLine();
             }
