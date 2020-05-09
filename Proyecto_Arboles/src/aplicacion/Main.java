@@ -17,12 +17,9 @@ public class Main {
         CSV datos = new CSV();
         datos.readCSV(ruta, totalEgresados);
         
-        System.out.println("Esto debería imprimir a Alex: ");
-        System.out.println(totalEgresados.get(2).toString());
-        System.out.println("Esto debería imprimir a Daniel: ");
-        System.out.println(totalEgresados.get(0).toString());
-        System.out.println("Esto debería imprimir a Jimmy: ");
-        System.out.println(totalEgresados.get(1).toString());
+        for (int i = 0; i < totalEgresados.size(); i++) {
+            System.out.println(totalEgresados.get(i).toString());
+        }
     }
     
 }

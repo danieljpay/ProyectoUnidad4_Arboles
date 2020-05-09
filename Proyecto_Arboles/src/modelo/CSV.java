@@ -24,6 +24,8 @@ public class CSV {
             
             //leer una linea del archivo
             String linea = bufferLectura.readLine();
+            
+            //se salta una linea para que no lea titulos
             linea = bufferLectura.readLine();
             
             while (linea != null) {
@@ -33,6 +35,7 @@ public class CSV {
                 profesion = campos[1];
                 promedio = Float.parseFloat(campos[2]);
                 destino.add(new Egresado(nombre, profesion, promedio));
+                
                 //volver a leer otra línea del fichero
                 linea = bufferLectura.readLine();
             }
