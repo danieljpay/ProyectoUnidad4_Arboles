@@ -11,6 +11,7 @@ package modelo;
  */
 public class ListaSimpleLigada {
     private Nodo head;
+    private int indice=0;
     
     //constructor
     public ListaSimpleLigada() {
@@ -19,6 +20,9 @@ public class ListaSimpleLigada {
     
     //Insertar nodo al incio
     public void insertarInicio(Nodo unNodo){
+        Nodo nodoAhora;
+        int enumeracion=0;
+        
         if(this.head == null){
             head = unNodo;
         }
@@ -27,16 +31,27 @@ public class ListaSimpleLigada {
             Nodo aux = this.head;
             this.head = unNodo;
             unNodo = aux;
+            
+            nodoAhora = this.head;
+            while (nodoAhora.getEnlace() != null) {
+                nodoAhora.setIndex(enumeracion);
+                enumeracion++;
+                nodoAhora = nodoAhora.getEnlace();
+            }
+            nodoAhora.setIndex(enumeracion);
+            this.indice = enumeracion;
         }
         
     }
     
     //Insertar nodo al final
     public void insertarFin(Nodo unNodo){
-        Nodo nodoAhora = this.head;     
+        Nodo nodoAhora = this.head;
+        indice++;
+        unNodo.setIndex(indice);
         
-        if(this.head == null){
-            head = unNodo;
+        if(nodoAhora == null){
+            this.head = unNodo;
         }
         else{
             if(nodoAhora.getEnlace() == null){
@@ -60,10 +75,10 @@ public class ListaSimpleLigada {
         }
         else{
             while(nodoAhora.getEnlace() != null){
-                cadenita += nodoAhora.getDato() + " -> ";
+                cadenita += nodoAhora.getIndex() +  " " + nodoAhora.getDato() + " -> ";
                 nodoAhora = nodoAhora.getEnlace();
             } 
-            cadenita += nodoAhora.getDato();
+            cadenita += nodoAhora.getIndex() + " " + nodoAhora.getDato();
             return cadenita;
         }
         

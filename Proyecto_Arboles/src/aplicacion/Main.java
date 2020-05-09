@@ -20,12 +20,33 @@ public class Main {
         System.out.println("comencemos leyendo el csv: ");
         datos.readCSV(ruta, matriculados);
         
-        /*String tempNombre = "Oswaldo";
+        String tempNombree = "Victor";
+        String tempProfesione = "arquitecto";
+        float tempPromedioe = (float) 9.3;
+        Egresado tempEgresadoe = new Egresado(tempNombree, tempProfesione, tempPromedioe);
+        Nodo tempNodoe = new Nodo(tempEgresadoe);
+        matriculados.insertarInicio(tempNodoe);
+        
+        String tempNombrex = "Alan";
+        String tempProfesionx = "arquitecto";
+        float tempPromediox = (float) 9.3;
+        Egresado tempEgresadox = new Egresado(tempNombrex, tempProfesionx, tempPromediox);
+        Nodo tempNodox = new Nodo(tempEgresadox);
+        matriculados.insertarFin(tempNodox);
+        
+        String tempNombre = "Oswaldo";
         String tempProfesion = "arquitecto";
         float tempPromedio = (float) 9.3;
         Egresado tempEgresado = new Egresado(tempNombre, tempProfesion, tempPromedio);
         Nodo tempNodo = new Nodo(tempEgresado);
-        matriculados.insertarInicio(tempNodo);*/
+        matriculados.insertarInicio(tempNodo);
+        
+        String tempNombrea = "Gabo";
+        String tempProfesiona = "arquitecto";
+        float tempPromedioa = (float) 9.3;
+        Egresado tempEgresadoa = new Egresado(tempNombrea, tempProfesiona, tempPromedioa);
+        Nodo tempNodoa = new Nodo(tempEgresadoa);
+        matriculados.insertarFin(tempNodoa);
         
         
         System.out.println(matriculados.toString());

@@ -43,7 +43,8 @@ public class Egresado {
 
     @Override
     public String toString() {
-        return "Egresado {" + "nombre= " + nombre + ", profesion= " + profesion + ", promedio= " + promedio + '}';
+        /*return "Egresado {" + "nombre= " + nombre + ", profesion= " + profesion + ", promedio= " + promedio + '}';*/
+        return nombre + " ";
     }
     
     

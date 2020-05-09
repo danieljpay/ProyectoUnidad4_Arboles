@@ -11,16 +11,22 @@ package modelo;
  * @author plupy
  */
 public class Nodo {
+    int index;
     Egresado dato;
     Nodo enlace;
     
     //constructor
     public Nodo(Egresado dato) {
+       this.index = 0;
        this.dato = dato;
        this.enlace = null;
     }
     
     //getters
+    public int getIndex() {
+        return index;
+    }
+    
     public Egresado getDato() {
         return dato;
     }
@@ -30,6 +36,10 @@ public class Nodo {
     }
     
     //setters
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
     public void setDato(Egresado dato) {
         this.dato = dato;
     }
