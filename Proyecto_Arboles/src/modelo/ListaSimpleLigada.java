@@ -47,13 +47,13 @@ public class ListaSimpleLigada {
     //Insertar nodo al final
     public void insertarFin(Nodo unNodo){
         Nodo nodoAhora = this.head;
-        indice++;
-        unNodo.setIndex(indice);
         
         if(nodoAhora == null){
             this.head = unNodo;
         }
         else{
+            indice++;
+            unNodo.setIndex(indice);
             if(nodoAhora.getEnlace() == null){
                 nodoAhora.setEnlace(unNodo);
             }
@@ -64,6 +64,30 @@ public class ListaSimpleLigada {
                 nodoAhora.setEnlace(unNodo);
             }  
         }
+    }
+    
+    //obtener nodo N
+    public Nodo obt(int number) throws Exception {
+        Nodo nodoAhora = this.head;
+        Nodo encontrado = null; //poner en función recibidora que si recibe null es que no existe el nodo
+        
+        if( number == this.head.getIndex() ){
+            encontrado = this.head;
+            return encontrado;
+        } else {
+            while(nodoAhora.getEnlace() != null){
+                nodoAhora = nodoAhora.getEnlace();
+                if(number == nodoAhora.getIndex()){
+                    encontrado = nodoAhora;
+                    return encontrado;
+                }
+            }
+        }
+
+        if (encontrado == null) {
+            throw new Exception("no existe ese nodo");
+        }
+        return encontrado;
     }
     
     //imprimir los nodos en la lista
