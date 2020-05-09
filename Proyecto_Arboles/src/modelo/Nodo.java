@@ -11,17 +11,17 @@ package modelo;
  * @author plupy
  */
 public class Nodo {
-    int dato;
+    Egresado dato;
     Nodo enlace;
     
     //constructor
-    public Nodo(int dato) {
+    public Nodo(Egresado dato) {
        this.dato = dato;
        this.enlace = null;
     }
     
     //getters
-    public int getDato() {
+    public Egresado getDato() {
         return dato;
     }
 
@@ -30,7 +30,7 @@ public class Nodo {
     }
     
     //setters
-    public void setDato(int dato) {
+    public void setDato(Egresado dato) {
         this.dato = dato;
     }
 

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import modelo.CSV;
 import modelo.Egresado;
+import modelo.ListaSimpleLigada;
+import modelo.Nodo;
 
 /**
  *
@@ -11,15 +13,23 @@ import modelo.Egresado;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        ArrayList<Egresado> totalEgresados = new ArrayList<Egresado>();
-        System.out.println("comencemos leyendo el csv: ");
-        String ruta = "Egresados.csv";
         CSV datos = new CSV();
-        datos.readCSV(ruta, totalEgresados);
+        String ruta = "Egresados.csv";
         
-        for (int i = 0; i < totalEgresados.size(); i++) {
-            System.out.println(totalEgresados.get(i).toString());
-        }
+        ListaSimpleLigada matriculados = new ListaSimpleLigada();
+        System.out.println("comencemos leyendo el csv: ");
+        datos.readCSV(ruta, matriculados);
+        
+        /*String tempNombre = "Oswaldo";
+        String tempProfesion = "arquitecto";
+        float tempPromedio = (float) 9.3;
+        Egresado tempEgresado = new Egresado(tempNombre, tempProfesion, tempPromedio);
+        Nodo tempNodo = new Nodo(tempEgresado);
+        matriculados.insertarInicio(tempNodo);*/
+        
+        
+        System.out.println(matriculados.toString());
+        
     }
     
 }

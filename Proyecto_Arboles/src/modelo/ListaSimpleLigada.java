@@ -7,38 +7,48 @@ package modelo;
  */
 
 /**
- *
  * @author plupy
  */
 public class ListaSimpleLigada {
-    private Nodo head = null;
+    private Nodo head;
     
     //constructor
-    public ListaSimpleLigada(Nodo head) {
-        this.head = head;
+    public ListaSimpleLigada() {
+        this.head = null;
     }
     
     //Insertar nodo al incio
     public void insertarInicio(Nodo unNodo){
-        unNodo.setEnlace(this.head);
-        Nodo aux = this.head;
-        this.head = unNodo;
-        unNodo = aux;
+        if(this.head == null){
+            head = unNodo;
+        }
+        else{
+            unNodo.setEnlace(this.head);
+            Nodo aux = this.head;
+            this.head = unNodo;
+            unNodo = aux;
+        }
+        
     }
     
     //Insertar nodo al final
     public void insertarFin(Nodo unNodo){
         Nodo nodoAhora = this.head;     
         
-        if(nodoAhora.getEnlace() == null){
-            nodoAhora.setEnlace(unNodo);
+        if(this.head == null){
+            head = unNodo;
         }
         else{
-            while(nodoAhora.getEnlace() != null){     
-                nodoAhora = nodoAhora.getEnlace();   
-            }   
-            nodoAhora.setEnlace(unNodo);
-        }  
+            if(nodoAhora.getEnlace() == null){
+                nodoAhora.setEnlace(unNodo);
+            }
+            else{
+                while(nodoAhora.getEnlace() != null){     
+                    nodoAhora = nodoAhora.getEnlace();   
+                }   
+                nodoAhora.setEnlace(unNodo);
+            }  
+        }
     }
     
     //imprimir los nodos en la lista
