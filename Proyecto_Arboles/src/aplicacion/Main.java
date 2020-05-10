@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) throws IOException, Exception {
         CSV datos = new CSV();
         String ruta = "Egresados.csv";
+        Nodo NodoObtenido;
         
         ListaSimpleLigada matriculados = new ListaSimpleLigada();
         System.out.println("comencemos leyendo el csv: ");
@@ -22,11 +23,10 @@ public class Main {
         
         System.out.println(matriculados.toString());
         
-        System.out.println("Obtengamos el nodo 2");
+        System.out.println("Obtengamos el nodo 5");
         
-        Nodo obtenido;
-        obtenido = matriculados.obt(4);
-        System.out.println(obtenido.getDato().toString());
+        NodoObtenido = matriculados.obt(5);
+        System.out.println(NodoObtenido.getEgresado().toString());
         
     }
     

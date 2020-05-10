@@ -12,13 +12,13 @@ package modelo;
  */
 public class Nodo {
     int index;
-    Egresado dato;
+    Egresado egresado;
     Nodo enlace;
     
     //constructor
     public Nodo(Egresado dato) {
        this.index = 0;
-       this.dato = dato;
+       this.egresado = dato;
        this.enlace = null;
     }
     
@@ -27,8 +27,8 @@ public class Nodo {
         return index;
     }
     
-    public Egresado getDato() {
-        return dato;
+    public Egresado getEgresado() {
+        return egresado;
     }
 
     public Nodo getEnlace() {
@@ -40,8 +40,8 @@ public class Nodo {
         this.index = index;
     }
     
-    public void setDato(Egresado dato) {
-        this.dato = dato;
+    public void setEgresado(Egresado dato) {
+        this.egresado = dato;
     }
 
     public void setEnlace(Nodo enlace) {

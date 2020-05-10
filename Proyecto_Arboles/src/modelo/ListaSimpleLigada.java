@@ -99,10 +99,10 @@ public class ListaSimpleLigada {
         }
         else{
             while(nodoAhora.getEnlace() != null){
-                cadenita += nodoAhora.getIndex() +  " " + nodoAhora.getDato() + " -> ";
+                cadenita += nodoAhora.getIndex() +  " " + nodoAhora.getEgresado() + " -> ";
                 nodoAhora = nodoAhora.getEnlace();
             } 
-            cadenita += nodoAhora.getIndex() + " " + nodoAhora.getDato();
+            cadenita += nodoAhora.getIndex() + " " + nodoAhora.getEgresado();
             return cadenita;
         }
         
