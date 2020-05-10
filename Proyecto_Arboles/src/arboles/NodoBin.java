@@ -11,6 +11,7 @@ package arboles;
 public class NodoBin {
     protected String dato;
     protected int[] referencia = new int[20];
+    protected int indRef;
     protected NodoBin izq;
     protected NodoBin der;
 
@@ -18,11 +19,13 @@ public class NodoBin {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
+        this.indRef=0;
     }
 
     public NodoBin(String dato, int number){
        this(dato,null,null);
        this.referencia[0] = number;
+       this.indRef=0;
     }
     
     public NodoBin(){
@@ -59,7 +62,7 @@ public class NodoBin {
     public void inOrden(){ //IRD
        if(izq!=null)
            izq.inOrden();
-     System.out.println(dato + "[" + referencia[0] + "]");//Raiz
+     System.out.println(dato + "[" + referencia[0] + ", " + referencia[1] + ", " + referencia[2] +"]");//Raiz
        if(der!=null)
            der.inOrden();
     }
@@ -113,7 +116,10 @@ public class NodoBin {
         this.referencia = referencia;
     }
     
-        
+    public void addReferencia(int n){
+        this.indRef++;
+        referencia[indRef] = n;
+    }
     
 }
 

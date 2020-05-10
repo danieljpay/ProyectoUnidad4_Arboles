@@ -79,16 +79,14 @@ public class ArbolABB {
   }
   
     private void insertarOrdenado(NodoBin n, String o, int b){
+        if(o.compareTo( n.getDato() ) == 0){
+            n.addReferencia(b);
+        }
         if (o.compareTo( n.getDato() ) > 0 ){
             if (n.getIzq()==null)
                 n.setIzq(new NodoBin(o, b));
             else{
-                if(n.dato.compareTo(o) == 0){
-                    n.referencia[n.referencia.length] = b;
-                }
-                else{
-                    insertarOrdenado(n.getIzq(),o, b);
-                }
+                insertarOrdenado(n.getIzq(),o, b);
             }  
         }
         else{
@@ -97,12 +95,7 @@ public class ArbolABB {
                     n.setDer(new NodoBin(o, b));
                 }
                 else{
-                    if(n.dato.compareTo(o) == 0){
-                        n.referencia[n.referencia.length]=b;
-                    }
-                    else{
-                        insertarOrdenado(n.getDer(),o, b);
-                    }
+                    insertarOrdenado(n.getDer(),o, b);
                 }
             }  
         }
@@ -116,6 +109,10 @@ public class ArbolABB {
   
     private int[] buscar(NodoBin n, String o) throws ItemNotFoundException{
         int[] referencias = null;
+        
+        if(o.compareTo( n.getDato() ) == 0){
+            referencias = n.getReferencia();
+        }
         if (o.compareTo( n.getDato() ) > 0 ){
             if (n.getIzq()==null){
                 throw new ItemNotFoundException("No está el dato :(");
