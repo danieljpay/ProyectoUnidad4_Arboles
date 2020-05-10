@@ -1,5 +1,6 @@
 package aplicacion;
 
+import arboles.ArbolABB;
 import java.io.IOException;
 import java.util.ArrayList;
 import modelo.CSV;
@@ -16,6 +17,7 @@ public class Main {
         CSV datos = new CSV();
         String ruta = "Egresados.csv";
         Nodo NodoObtenido;
+        int temp=0;
         
         ListaSimpleLigada matriculados = new ListaSimpleLigada();
         System.out.println("comencemos leyendo el csv: ");
@@ -28,6 +30,15 @@ public class Main {
         NodoObtenido = matriculados.obt(5);
         System.out.println(NodoObtenido.getEgresado().toString());
         
+        System.out.println("Comencemos a formar el árbol");
+        ArbolABB arbolito = new ArbolABB(matriculados.obt(0).getEgresado().getNombre(), matriculados.obt(0).getIndex());
+        for(int i=1; matriculados.obt(i).getEnlace()!= null; i++){
+            arbolito.insertar(matriculados.obt(i).getEgresado().getNombre(), i);
+            temp=i;
+        }
+        temp++;
+        arbolito.insertar(matriculados.obt(temp).getEgresado().getNombre(), temp);
+        arbolito.inOrden();
     }
     
 }

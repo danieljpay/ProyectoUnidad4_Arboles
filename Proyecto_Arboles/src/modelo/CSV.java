@@ -42,7 +42,6 @@ public class CSV {
                 //volver a leer otra línea del fichero
                 linea = bufferLectura.readLine();
             }
-            
             bufferLectura.close();
         }
         catch(IOException e){

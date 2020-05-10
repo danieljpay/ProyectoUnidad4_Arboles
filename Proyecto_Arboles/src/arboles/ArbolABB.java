@@ -10,13 +10,9 @@ package arboles;
  */
 public class ArbolABB {
   protected NodoBin raiz;
-
-    public ArbolABB(){
-        this(null);
-    }
   
-    public ArbolABB(Object o){
-        raiz = new NodoBin(o);
+    public ArbolABB(String o, int n){
+        raiz = new NodoBin(o, n);
     }
   
     public void inOrden(){
@@ -35,22 +31,22 @@ public class ArbolABB {
         raiz.preOrden();        
   }
   
-  public void insertar(Object o){
-    insertarOrdenado(raiz,o);
+  public void insertar(String o, int n){
+    insertarOrdenado(raiz,o, n);
   }
   
-  public void borrar(Object o){
+  public void borrar(String o){
     borrar(raiz,o);
   }
   
-  private NodoBin borrar(NodoBin n, Object o) throws ItemNotFoundException{
+  private NodoBin borrar(NodoBin n, String o) throws ItemNotFoundException{
     if (n==null)
         throw new ItemNotFoundException("Elemento no encontrado");
     else{
-      if ((int)o > (int)n.getDato())
+      if (o.compareTo( n.getDato() ) < 0)
         n.setDer(borrar(n.getDer(),o));
       else
-         if((int)o < (int)n.getDato())
+         if(o.compareTo( n.getDato() ) > 0)
             n.setIzq(borrar(n.getIzq(),o));
          else{//Ya encontré el elemento a eliminar!!
            if (n.getDer()!=null && n.getIzq()!=null)//Aquí aplicamos los criterios cuando hay 2 hijos      
@@ -82,45 +78,68 @@ public class ArbolABB {
        return n.getDer();
   }
   
-  private void insertarOrdenado(NodoBin n, Object o){  
-  if ((int)o<(int)n.getDato()){
-     if (n.getIzq()==null)
-         n.setIzq(new NodoBin(o));
-     else
-         insertarOrdenado(n.getIzq(),o);
-     }
-  else{
-  if((int)o>(int)n.getDato()){
-    if (n.getDer()==null)
-       n.setDer(new NodoBin(o));
-    else
-       insertarOrdenado(n.getDer(),o);     
-     }  
-     }
-  }
+    private void insertarOrdenado(NodoBin n, String o, int b){
+        if (o.compareTo( n.getDato() ) > 0 ){
+            if (n.getIzq()==null)
+                n.setIzq(new NodoBin(o, b));
+            else{
+                if(n.dato.compareTo(o) == 0){
+                    n.referencia[n.referencia.length] = b;
+                }
+                else{
+                    insertarOrdenado(n.getIzq(),o, b);
+                }
+            }  
+        }
+        else{
+            if( o.compareTo( n.getDato() ) < 0 ){
+                if (n.getDer()==null){
+                    n.setDer(new NodoBin(o, b));
+                }
+                else{
+                    if(n.dato.compareTo(o) == 0){
+                        n.referencia[n.referencia.length]=b;
+                    }
+                    else{
+                        insertarOrdenado(n.getDer(),o, b);
+                    }
+                }
+            }  
+        }
+    }
   
-  public void buscar(Object o){
-    buscar(raiz,o);
-  }
+    public int[] buscar(String o){
+        int[] referenciasEnLista;
+        referenciasEnLista = buscar(raiz,o);
+        return referenciasEnLista;
+    }
   
-  private void buscar(NodoBin n, Object o) throws ItemNotFoundException{
-  if ((int)o<(int)n.getDato()){
-     if (n.getIzq()==null)
-         throw new ItemNotFoundException("No está el dato :(");
-     else
-         buscar(n.getIzq(),o);
-     }
-  else{
-  if((int)o>(int)n.getDato()){
-    if (n.getDer()==null)
-       throw new ItemNotFoundException("No está el dato :(");
-    else
-       buscar(n.getDer(),o);     
-     }
-  else
-     System.out.println("El dato si está en el árbol");
-     }
-  }
+    private int[] buscar(NodoBin n, String o) throws ItemNotFoundException{
+        int[] referencias = null;
+        if (o.compareTo( n.getDato() ) > 0 ){
+            if (n.getIzq()==null){
+                throw new ItemNotFoundException("No está el dato :(");
+            }
+            else{
+                buscar(n.getIzq(),o);
+            }
+        }
+        else{
+            if( o.compareTo( n.getDato() ) < 0 ){
+                if (n.getDer()==null){
+                    throw new ItemNotFoundException("No está el dato :(");
+                } 
+                else{
+                    buscar(n.getDer(),o);     
+                }  
+            }
+            else{
+                System.out.println("El dato si está en el árbol");
+                referencias = n.getReferencia();
+            }
+        }
+        return referencias;
+    }
     /**
      * @return the raiz
      */
@@ -135,19 +154,19 @@ public class ArbolABB {
         this.raiz = raiz;
     }
   
-    public static void main(String[] args) {
-      ArbolABB arbol = new ArbolABB(25);
-      arbol.insertar(73);
-      arbol.insertar(48);
-      arbol.insertar(1);
-      arbol.insertar(67);
-      arbol.insertar(5);
-      arbol.insertar(99);
-      arbol.insertar(7);
-      arbol.insertar(44);
-      arbol.insertar(91);
-      arbol.insertar(70);
-      arbol.insertar(6);
+    /*public static void main(String[] args) {
+      ArbolABB arbol = new ArbolABB("Daniel", 1);
+      arbol.insertar("Hola", 2);
+      arbol.insertar("Como", 3);
+      arbol.insertar("Estas", 4);
+      arbol.insertar("Por", 5);
+      arbol.insertar("que", 7);
+      arbol.insertar("no", 8);
+      arbol.insertar("te", 9);
+      arbol.insertar("vas", 10);
+      arbol.insertar("a", 11);
+      arbol.insertar("la", 12);
+      arbol.insertar("verga", 13);
       System.out.println("RECORRIDO EN INORDEN");
       arbol.inOrden();      
       
@@ -157,12 +176,12 @@ public class ArbolABB {
       arbol.posOrden();      
       System.out.println("Buscando datos...");
       try{
-         arbol.buscar(99);         
+         arbol.buscar("verga");         
         }
       catch(ItemNotFoundException e){
           System.out.println("Error: " + e.getMessage());
       }
-      int eliminado = 48;
+      String eliminado = "que";
       System.out.println("Eliminando el elemento: " + eliminado);
       try{
          arbol.borrar(eliminado);
@@ -171,5 +190,5 @@ public class ArbolABB {
       catch (ItemNotFoundException e){
           System.out.println("Error: " + e.getMessage());
       }
-    }
+    }*/
 }

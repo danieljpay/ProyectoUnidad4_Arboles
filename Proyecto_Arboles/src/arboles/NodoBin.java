@@ -4,37 +4,38 @@
  */
 package arboles;
 
-import java.lang.reflect.Array;
-
 /**
  *
  * @author jorge.reyes
  */
 public class NodoBin {
-    protected Object dato;
-    protected Array[] referencia;
+    protected String dato;
+    protected int[] referencia = new int[20];
     protected NodoBin izq;
     protected NodoBin der;
 
-    public NodoBin(Object dato, NodoBin izq, NodoBin der) {
+    public NodoBin(String dato, NodoBin izq, NodoBin der) {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
-        referencia = new Array[20];
     }
 
-    public NodoBin(Object dato){
+    public NodoBin(String dato, int number){
        this(dato,null,null);
+       this.referencia[0] = number;
     }
     
     public NodoBin(){
-        this(null);
+        this.dato = null;
+        this.izq = null;
+        this.der = null;
+        this.referencia = null;
     }
     
     /**
      * @return the dato
      */
-    public Object getDato() {
+    public String getDato() {
         return dato;
     }
 
@@ -58,7 +59,7 @@ public class NodoBin {
     public void inOrden(){ //IRD
        if(izq!=null)
            izq.inOrden();
-     System.out.println(dato);//Raiz
+     System.out.println(dato + "[" + referencia[0] + "]");//Raiz
        if(der!=null)
            der.inOrden();
     }
@@ -66,7 +67,7 @@ public class NodoBin {
     /**
      * @param dato the dato to set
      */
-    public void setDato(Object dato) {
+    public void setDato(String dato) {
         this.dato = dato;
     }
 
@@ -101,14 +102,14 @@ public class NodoBin {
     /**
      * @return the array
      */
-    public Array[] getReferencia() {
+    public int[] getReferencia() {
         return referencia;
     }
 
     /**
      * @param referencia the referencia to set
      */
-    public void setReferencia(Array[] referencia) {
+    public void setReferencia(int[] referencia) {
         this.referencia = referencia;
     }
     
