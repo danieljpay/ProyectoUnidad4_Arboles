@@ -19,7 +19,6 @@ public class Main {
         Nodo NodoObtenido;
         int temp=0;
         ArrayList tempArray = new ArrayList();
-
         
         ListaSimpleLigada matriculados = new ListaSimpleLigada();
         System.out.println("comencemos leyendo el csv: ");
@@ -42,6 +41,7 @@ public class Main {
         arbolito.insertar(matriculados.obt(temp).getEgresado().getNombre(), temp);
         arbolito.inOrden();
         
+        System.out.println("\nBusquemos algunas personas");
         tempArray = arbolito.buscar("Jorge");
         for (int i = 0; i < tempArray.size(); i++) {
             System.out.println(tempArray.get(i));

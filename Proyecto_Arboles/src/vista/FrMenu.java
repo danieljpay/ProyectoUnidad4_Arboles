@@ -90,6 +90,11 @@ public class FrMenu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbCoincidences);
 
         btnLoadData.setText("Cargar datos");
+        btnLoadData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadDataActionPerformed(evt);
+            }
+        });
 
         lbTotalCompares.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbTotalCompares.setText("Comparaciones totales:");
@@ -209,6 +214,11 @@ public class FrMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadDataActionPerformed
+        //btnLoadData
+        
+    }//GEN-LAST:event_btnLoadDataActionPerformed
 
     /**
      * @param args the command line arguments
