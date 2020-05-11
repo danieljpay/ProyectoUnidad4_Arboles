@@ -4,14 +4,15 @@
  */
 package arboles;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jorge.reyes
  */
 public class NodoBin {
     protected String dato;
-    protected int[] referencia = new int[20];
-    protected int indRef;
+    protected ArrayList referencia = new ArrayList();
     protected NodoBin izq;
     protected NodoBin der;
 
@@ -19,13 +20,11 @@ public class NodoBin {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
-        this.indRef=0;
     }
 
     public NodoBin(String dato, int number){
        this(dato,null,null);
-       this.referencia[0] = number;
-       this.indRef=0;
+       this.referencia.add(number);
     }
     
     public NodoBin(){
@@ -62,7 +61,7 @@ public class NodoBin {
     public void inOrden(){ //IRD
        if(izq!=null)
            izq.inOrden();
-     System.out.println(dato + "[" + referencia[0] + ", " + referencia[1] + ", " + referencia[2] +"]");//Raiz
+     System.out.println(dato);//Raiz
        if(der!=null)
            der.inOrden();
     }
@@ -105,20 +104,15 @@ public class NodoBin {
     /**
      * @return the array
      */
-    public int[] getReferencia() {
+    public ArrayList getReferencia() {
         return referencia;
     }
 
     /**
      * @param referencia the referencia to set
      */
-    public void setReferencia(int[] referencia) {
+    public void setReferencia(ArrayList referencia) {
         this.referencia = referencia;
-    }
-    
-    public void addReferencia(int n){
-        this.indRef++;
-        referencia[indRef] = n;
     }
     
 }

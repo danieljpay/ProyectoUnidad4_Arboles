@@ -4,12 +4,15 @@
  */
 package arboles;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jorge.reyes
  */
 public class ArbolABB {
   protected NodoBin raiz;
+  protected ArrayList searched;
   
     public ArbolABB(String o, int n){
         raiz = new NodoBin(o, n);
@@ -80,7 +83,7 @@ public class ArbolABB {
   
     private void insertarOrdenado(NodoBin n, String o, int b){
         if(o.compareTo( n.getDato() ) == 0){
-            n.addReferencia(b);
+            n.referencia.add(b);
         }
         if (o.compareTo( n.getDato() ) > 0 ){
             if (n.getIzq()==null)
@@ -101,14 +104,15 @@ public class ArbolABB {
         }
     }
   
-    public int[] buscar(String o){
-        int[] referenciasEnLista;
+    public ArrayList buscar(String o){
+        ArrayList referenciasEnLista;
         referenciasEnLista = buscar(raiz,o);
         return referenciasEnLista;
     }
   
-    private int[] buscar(NodoBin n, String o) throws ItemNotFoundException{
-        int[] referencias = null;
+    private ArrayList buscar(NodoBin n, String o) throws ItemNotFoundException{
+        ArrayList referencias = null;
+        ArrayList finish = null;
         
         if(o.compareTo( n.getDato() ) == 0){
             referencias = n.getReferencia();
@@ -132,10 +136,10 @@ public class ArbolABB {
             }
             else{
                 System.out.println("El dato si está en el árbol");
-                referencias = n.getReferencia();
+                searched = n.getReferencia();
             }
         }
-        return referencias;
+        return searched;
     }
     /**
      * @return the raiz
