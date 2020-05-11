@@ -121,5 +121,9 @@ public class NodoBin {
         referencia[indRef] = n;
     }
     
+    public int getIndRef(){
+        return this.indRef;
+    }
+    
 }
 

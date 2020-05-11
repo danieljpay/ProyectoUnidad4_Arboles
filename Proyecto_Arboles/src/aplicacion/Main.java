@@ -18,6 +18,7 @@ public class Main {
         String ruta = "Egresados.csv";
         Nodo NodoObtenido;
         int temp=0;
+        int[] referencias;
         
         ListaSimpleLigada matriculados = new ListaSimpleLigada();
         System.out.println("comencemos leyendo el csv: ");
@@ -39,6 +40,13 @@ public class Main {
         temp++;
         arbolito.insertar(matriculados.obt(temp).getEgresado().getNombre(), temp);
         arbolito.inOrden();
+        
+        System.out.println("Busquemos dentro del árbol a Jorge: ");
+        referencias = arbolito.buscar("Jorge");
+        
+        for(int i : referencias){
+            System.out.println(matriculados.obt(referencias[i]).getEgresado().toString() + ", " + matriculados.obt(referencias[i]).getEgresado().getProfesion() + ", " + matriculados.obt(referencias[i]).getEgresado().getPromedio());
+        }
     }
     
 }
