@@ -5,21 +5,30 @@
  */
 package vista;
 
+import controller.Controller;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author plupy
  */
 public class FrMenu extends javax.swing.JFrame {
-
+    Controller controlador;
+    DefaultTableModel modeloCoincidencias;
     /**
      * Creates new form FrMenu
      */
-    public FrMenu() {
+    public FrMenu(Controller controlador) {
         initComponents();
+        this.controlador = controlador;
         this.setLocationRelativeTo(null);
         searchOptions.add(rbName);
         searchOptions.add(rbAverage);
         searchOptions.add(rbDegree);
+        modeloCoincidencias = new DefaultTableModel();
+        tbCoincidences.setModel(modeloCoincidencias);
     }
 
     /**
@@ -49,9 +58,9 @@ public class FrMenu extends javax.swing.JFrame {
         lbDirection = new javax.swing.JLabel();
         txtDirection = new javax.swing.JTextField();
         txtAverage = new javax.swing.JTextField();
-        cbDegree = new javax.swing.JComboBox<>();
         lbCoincidences = new javax.swing.JLabel();
         lbTimeExecute = new javax.swing.JLabel();
+        txtDegree = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,14 +76,24 @@ public class FrMenu extends javax.swing.JFrame {
         lbQuestionTree.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbQuestionTree.setText("¿Qué tipo de árbol desea?");
 
-        optionesTree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Árbol AB", "Árbol AVL", "Árbol B" }));
+        optionesTree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Árbol ABB", "Árbol AVL", "Árbol B" }));
 
         btnCreateTree.setText("Crear árbol");
+        btnCreateTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateTreeActionPerformed(evt);
+            }
+        });
 
         lbQuestionSearch.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbQuestionSearch.setText("¿Cómo desea realizar su búsqueda?");
 
         btnSearch.setText("Buscar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         tbCoincidences.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,8 +120,6 @@ public class FrMenu extends javax.swing.JFrame {
 
         lbDirection.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbDirection.setText("Dirección: ");
-
-        cbDegree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingeniería de software", " " }));
 
         lbCoincidences.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbCoincidences.setText("Coincidencias:");
@@ -146,11 +163,10 @@ public class FrMenu extends javax.swing.JFrame {
                                     .addComponent(rbAverage)
                                     .addComponent(rbDegree))
                                 .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbDegree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                        .addComponent(txtAverage))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                    .addComponent(txtAverage)
+                                    .addComponent(txtDegree)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(116, 116, 116)
                                 .addComponent(btnSearch)))
@@ -198,7 +214,7 @@ public class FrMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbDegree)
-                            .addComponent(cbDegree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDegree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -209,7 +225,7 @@ public class FrMenu extends javax.swing.JFrame {
                         .addComponent(lbTotalCompares)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbTimeExecute)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,8 +233,48 @@ public class FrMenu extends javax.swing.JFrame {
 
     private void btnLoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadDataActionPerformed
         //btnLoadData
-        
+        try {
+            controlador.getDatos().readCSV(txtDirection.getText(), controlador.getMatriculados()); 
+            txtDirection.setText("");
+        } 
+        catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar los datos, revisa la ruta");
+        }
     }//GEN-LAST:event_btnLoadDataActionPerformed
+
+    private void btnCreateTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateTreeActionPerformed
+        try {
+            //btnCreateTree
+            controlador.crearArbol();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
+        }
+    }//GEN-LAST:event_btnCreateTreeActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        //btnSearch
+        String busqueda = null;
+        try {
+            if(rbName.isSelected()){
+                busqueda = txtName.getText();
+                controlador.treeCreatedSearch(busqueda, controlador.getArbolABBNombres());
+                controlador.imprimirEnTabla(modeloCoincidencias, busqueda, controlador.getArbolABBNombres());
+            }
+            else if(rbAverage.isSelected()){
+                busqueda = txtAverage.getText();
+                controlador.treeCreatedSearch(busqueda, controlador.getArbolABBPromedio());
+                controlador.imprimirEnTabla(modeloCoincidencias, busqueda, controlador.getArbolABBPromedio());
+            }
+            else if (rbDegree.isSelected()) {
+                busqueda = txtDegree.getText();
+                controlador.treeCreatedSearch(busqueda, controlador.getArbolABBProfesion());
+                controlador.imprimirEnTabla(modeloCoincidencias, busqueda, controlador.getArbolABBProfesion());
+            }
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, busqueda + " no fue encontrado dentro del árbol");
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,8 +305,9 @@ public class FrMenu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            private Controller controlador;
             public void run() {
-                new FrMenu().setVisible(true);
+                new FrMenu(this.controlador).setVisible(true);
             }
         });
     }
@@ -259,7 +316,6 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnCreateTree;
     private javax.swing.JButton btnLoadData;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<String> cbDegree;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCoincidences;
     private javax.swing.JLabel lbDirection;
@@ -275,6 +331,7 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.ButtonGroup searchOptions;
     private javax.swing.JTable tbCoincidences;
     private javax.swing.JTextField txtAverage;
+    private javax.swing.JTextField txtDegree;
     private javax.swing.JTextField txtDirection;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

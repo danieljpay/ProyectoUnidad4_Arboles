@@ -135,7 +135,7 @@ public class ArbolABB {
                 }  
             }
             else{
-                System.out.println( n.getDato() + " si está en el árbol");
+                System.out.println( n.getDato() + " sí está en el árbol: \n");
                 searched = n.getReferencia();
             }
         }

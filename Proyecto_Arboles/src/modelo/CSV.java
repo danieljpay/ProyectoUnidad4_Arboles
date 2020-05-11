@@ -1,10 +1,12 @@
 package modelo;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,9 +45,11 @@ public class CSV {
                 linea = bufferLectura.readLine();
             }
             bufferLectura.close();
+            System.out.println("Datos cargados");
+            JOptionPane.showMessageDialog(null, "Datos cargados correctamente");
         }
         catch(IOException e){
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar los archivos, revisa la ruta");
         }
     }
 }

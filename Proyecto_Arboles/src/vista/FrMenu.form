@@ -68,12 +68,10 @@
                                   <Component id="rbDegree" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbDegree" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtName" pref="163" max="32767" attributes="0"/>
-                                      <Component id="txtAverage" max="32767" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtName" pref="163" max="32767" attributes="0"/>
+                                  <Component id="txtAverage" max="32767" attributes="0"/>
+                                  <Component id="txtDegree" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -136,7 +134,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="rbDegree" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbDegree" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDegree" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="156" max="-2" attributes="0"/>
@@ -153,7 +151,7 @@
                       <Component id="lbTimeExecute" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -194,7 +192,7 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="&#xc1;rbol AB"/>
+            <StringItem index="0" value="&#xc1;rbol ABB"/>
             <StringItem index="1" value="&#xc1;rbol AVL"/>
             <StringItem index="2" value="&#xc1;rbol B"/>
           </StringArray>
@@ -208,6 +206,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear &#xe1;rbol"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateTreeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbQuestionSearch">
       <Properties>
@@ -221,6 +222,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -272,19 +276,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtAverage">
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbDegree">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="Ingenier&#xed;a de software"/>
-            <StringItem index="1" value=" "/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="lbCoincidences">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -300,6 +291,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Tiempo de ejecuci&#xf3;n:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDegree">
     </Component>
   </SubComponents>
 </Form>
