@@ -114,18 +114,5 @@ public class NodoBin {
     public void setReferencia(ArrayList referencia) {
         this.referencia = referencia;
     }
-    
-<<<<<<< HEAD
-=======
-    public void addReferencia(int n){
-        this.indRef++;
-        referencia[indRef] = n;
-    }
-    
-    public int getIndRef(){
-        return this.indRef;
-    }
-    
->>>>>>> refs/remotes/origin/master
 }
 

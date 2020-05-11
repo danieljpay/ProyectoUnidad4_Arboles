@@ -18,11 +18,8 @@ public class Main {
         String ruta = "Egresados.csv";
         Nodo NodoObtenido;
         int temp=0;
-<<<<<<< HEAD
         ArrayList tempArray = new ArrayList();
-=======
-        int[] referencias;
->>>>>>> refs/remotes/origin/master
+
         
         ListaSimpleLigada matriculados = new ListaSimpleLigada();
         System.out.println("comencemos leyendo el csv: ");
@@ -45,7 +42,6 @@ public class Main {
         arbolito.insertar(matriculados.obt(temp).getEgresado().getNombre(), temp);
         arbolito.inOrden();
         
-<<<<<<< HEAD
         tempArray = arbolito.buscar("Jorge");
         for (int i = 0; i < tempArray.size(); i++) {
             System.out.println(tempArray.get(i));
@@ -68,13 +64,6 @@ public class Main {
         }
         for (int i = 0; i < tempArray.size(); i++) {
             System.out.println(matriculados.obt((int)tempArray.get(i)).getEgresado().getNombre() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getProfesion() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getPromedio());
-=======
-        System.out.println("Busquemos dentro del árbol a Jorge: ");
-        referencias = arbolito.buscar("Jorge");
-        
-        for(int i : referencias){
-            System.out.println(matriculados.obt(referencias[i]).getEgresado().toString() + ", " + matriculados.obt(referencias[i]).getEgresado().getProfesion() + ", " + matriculados.obt(referencias[i]).getEgresado().getPromedio());
->>>>>>> refs/remotes/origin/master
         }
     }
     
