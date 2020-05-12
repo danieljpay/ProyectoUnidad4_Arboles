@@ -245,7 +245,7 @@ public class FrMenu extends javax.swing.JFrame {
     private void btnCreateTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateTreeActionPerformed
         try {
             //btnCreateTree
-            controlador.crearArbol();
+            controlador.crearArbolesABB();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
         }

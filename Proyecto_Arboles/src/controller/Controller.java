@@ -6,8 +6,8 @@
 package controller;
 
 import arboles.ArbolABB;
+import arboles.ArbolAVL;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.CSV;
 import modelo.ListaSimpleLigada;
@@ -19,9 +19,12 @@ import modelo.ListaSimpleLigada;
 public class Controller {
     CSV datos = new CSV();
     ListaSimpleLigada matriculados = new ListaSimpleLigada();
-    ArbolABB arbolitoNombres;
-    ArbolABB arbolitoProfesion;
-    ArbolABB arbolitoPromedio;
+    ArbolABB arbolitoABBNombres;
+    ArbolABB arbolitoABBProfesion;
+    ArbolABB arbolitoABBPromedio;
+    ArbolAVL arbolitoAVLNombres;
+    ArbolAVL arbolitoAVLProfesion;
+    ArbolAVL arbolitoAVLPromedio;
 
     //constructor
     public Controller() {
@@ -63,39 +66,39 @@ public class Controller {
     }
     
     //arbolABB
-    public void crearArbol() throws Exception{
+    public void crearArbolesABB() throws Exception{
         int temp=0;
-        arbolitoNombres = new ArbolABB(matriculados.obt(0).getEgresado().getNombre(), matriculados.obt(0).getIndex());
-        arbolitoProfesion = new ArbolABB(matriculados.obt(0).getEgresado().getProfesion(), matriculados.obt(0).getIndex());
-        arbolitoPromedio = new ArbolABB(matriculados.obt(0).getEgresado().getPromedio()+"", matriculados.obt(0).getIndex());
+        arbolitoABBNombres = new ArbolABB(matriculados.obt(0).getEgresado().getNombre(), matriculados.obt(0).getIndex());
+        arbolitoABBProfesion = new ArbolABB(matriculados.obt(0).getEgresado().getProfesion(), matriculados.obt(0).getIndex());
+        arbolitoABBPromedio = new ArbolABB(matriculados.obt(0).getEgresado().getPromedio()+"", matriculados.obt(0).getIndex());
         for(int i=1; matriculados.obt(i).getEnlace()!= null; i++){
-            arbolitoNombres.insertar(matriculados.obt(i).getEgresado().getNombre(), i);
-            arbolitoProfesion.insertar(matriculados.obt(i).getEgresado().getProfesion(), i);
-            arbolitoPromedio.insertar(matriculados.obt(i).getEgresado().getPromedio()+"", i);
+            arbolitoABBNombres.insertar(matriculados.obt(i).getEgresado().getNombre(), i);
+            arbolitoABBProfesion.insertar(matriculados.obt(i).getEgresado().getProfesion(), i);
+            arbolitoABBPromedio.insertar(matriculados.obt(i).getEgresado().getPromedio()+"", i);
             temp=i;
         }
         temp++;
-        arbolitoNombres.insertar(matriculados.obt(temp).getEgresado().getNombre(), temp);
-        arbolitoProfesion.insertar(matriculados.obt(temp).getEgresado().getProfesion(), temp);
-        arbolitoPromedio.insertar(matriculados.obt(temp).getEgresado().getPromedio()+"", temp);
+        arbolitoABBNombres.insertar(matriculados.obt(temp).getEgresado().getNombre(), temp);
+        arbolitoABBProfesion.insertar(matriculados.obt(temp).getEgresado().getProfesion(), temp);
+        arbolitoABBPromedio.insertar(matriculados.obt(temp).getEgresado().getPromedio()+"", temp);
         
-        arbolitoNombres.inOrden();
+        arbolitoABBNombres.inOrden();
         System.out.println("------------------");
-        arbolitoProfesion.inOrden();
+        arbolitoABBProfesion.inOrden();
         System.out.println("------------------");
-        arbolitoPromedio.inOrden();
+        arbolitoABBPromedio.inOrden();
     }
     
     public ArbolABB getArbolABBNombres(){
-        return arbolitoNombres;
+        return arbolitoABBNombres;
     }
     
     public ArbolABB getArbolABBProfesion(){
-        return arbolitoProfesion;
+        return arbolitoABBProfesion;
     }
     
     public ArbolABB getArbolABBPromedio(){
-        return arbolitoPromedio;
+        return arbolitoABBPromedio;
     }
     
     public void treeCreatedSearch(String nombre, ArbolABB arbolito) throws Exception{
@@ -114,9 +117,10 @@ public class Controller {
         }
         catch(Exception e){
             System.out.println(nombre + " no fue encontrado");
-        }
-        
+        }   
     }
+    
+    //arbolAVL
     
     
 }
