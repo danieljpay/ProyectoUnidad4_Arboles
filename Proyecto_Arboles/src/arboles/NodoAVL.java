@@ -20,12 +20,12 @@ public class NodoAVL extends NodoBin{
         super(nombre, num);
     }
     
-    public NodoAVL(String o,NodoAVL i, NodoAVL d){
-        super(o,d,i);
+    public NodoAVL(String o, int n, NodoAVL i, NodoAVL d){
+        super(o,n,d,i);
     }
     
-    public NodoAVL(String o,NodoAVL i, NodoAVL d, NodoAVL p){
-        super(o,d,i);
+    public NodoAVL(String o, int n, NodoAVL i, NodoAVL d, NodoAVL p){
+        super(o,n,d,i);
         padre = p;
     }
     

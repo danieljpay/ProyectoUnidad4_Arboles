@@ -4,16 +4,15 @@
  */
 package arboles;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jorge.reyes
  */
 public class ArbolAVL {
   protected NodoAVL raiz;
-    
-    public ArbolAVL(){
-      raiz = null;
-    }
+  protected ArrayList searched;
     
     public ArbolAVL(String o, int n){
       raiz = new NodoAVL(o, n);
@@ -34,30 +33,69 @@ public class ArbolAVL {
            raiz.posOrden();
     }
     
+    public ArrayList buscar(String o){
+        ArrayList referenciasEnLista;
+        referenciasEnLista = buscar(raiz, o);
+        return referenciasEnLista;
+    }
+  
+    private ArrayList buscar(NodoAVL n, String o) throws ItemNotFoundException{
+        
+        if(o.compareTo( n.getDato() ) == 0){
+            searched = n.getReferencia();
+        }
+        if (o.compareTo( n.getDato() ) > 0 ){
+            if (n.getIzq()==null){
+                throw new ItemNotFoundException("No está el dato :(");
+            }
+            else{
+                buscar((NodoAVL) n.getIzq(),o);
+            }
+        }
+        else{
+            if( o.compareTo( n.getDato() ) < 0 ){
+                if (n.getDer()==null){
+                    throw new ItemNotFoundException("No está el dato :(");
+                } 
+                else{
+                    buscar((NodoAVL) n.getDer(),o);     
+                }  
+            }
+            else{
+                System.out.println( n.getDato() + " sí está en el árbol: \n");
+                searched = n.getReferencia();
+            }
+        }
+        return searched;
+    }
+    
     public void insertar(String o, int n){
     insertarOrdenado(raiz,o, n);
   }
     
-   private void insertarOrdenado(NodoAVL n, String o, int b){  
-  if ( o.compareTo( n.getDato() )  > 0){
-     if (n.getIzq()==null){
-         n.setIzq(new NodoAVL(o,null,null,n));
-         recalcularFE(n);
-     }
-     else
-         insertarOrdenado((NodoAVL)n.getIzq(),o, b);
-     }
-  else{
-  if( o.compareTo( n.getDato() ) < 0){
-    if (n.getDer()==null){
-       n.setDer(new NodoAVL(o,null,null,n));
-       recalcularFE(n);
+    private void insertarOrdenado(NodoAVL n, String o, int b){  
+        if(o.compareTo( n.getDato() ) == 0){
+            n.referencia.add(b);
         }
-    else
-       insertarOrdenado((NodoAVL)n.getDer(),o, b);     
-     }  
-     }
-  }
+        if ( o.compareTo( n.getDato() )  > 0){
+            if (n.getIzq()==null){
+                n.setIzq(new NodoAVL(o,b,null,null,n));
+                recalcularFE(n);
+            }
+            else
+                insertarOrdenado((NodoAVL)n.getIzq(),o, b);
+            }
+        else{
+            if( o.compareTo( n.getDato() ) < 0){
+                if (n.getDer()==null){
+                    n.setDer(new NodoAVL(o,b,null,null,n));
+                    recalcularFE(n);
+                }
+            else
+               insertarOrdenado((NodoAVL)n.getDer(),o, b);     
+            }  
+        }
+    }
    
    public void recalcularFE(NodoAVL nodo){
      if (nodo!=null){
@@ -250,20 +288,5 @@ public class ArbolAVL {
      }
      R.setFE(0);
    }
-   
-    public static void main(String[] args) {
-    ArbolAVL arbol = new ArbolAVL("Daniel", 0); 
-    arbol.insertar("Eberth", 2);
-    arbol.insertar("Rodrigo", 3);
-    arbol.insertar("Cristina", 4);
-    arbol.insertar("Salvador", 5);
-    arbol.insertar("Gabriela", 6);
-    arbol.insertar("Jorge", 7);
-    arbol.insertar("Sawayakito", 8);
-    arbol.insertar("sisuso", 9);    
-    arbol.inOrden();
-    
-    }
-   
     
 }

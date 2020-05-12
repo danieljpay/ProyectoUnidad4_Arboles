@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class FrMenu extends javax.swing.JFrame {
     Controller controlador;
     DefaultTableModel modeloCoincidencias;
+    int arbolPreferido;
     /**
      * Creates new form FrMenu
      */
@@ -30,7 +31,7 @@ public class FrMenu extends javax.swing.JFrame {
         modeloCoincidencias = new DefaultTableModel();
         tbCoincidences.setModel(modeloCoincidencias);
     }
-
+          
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,7 +47,7 @@ public class FrMenu extends javax.swing.JFrame {
         rbDegree = new javax.swing.JRadioButton();
         lbTitle = new javax.swing.JLabel();
         lbQuestionTree = new javax.swing.JLabel();
-        optionesTree = new javax.swing.JComboBox<>();
+        optionsTree = new javax.swing.JComboBox<>();
         btnCreateTree = new javax.swing.JButton();
         lbQuestionSearch = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
@@ -76,7 +77,7 @@ public class FrMenu extends javax.swing.JFrame {
         lbQuestionTree.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbQuestionTree.setText("¿Qué tipo de árbol desea?");
 
-        optionesTree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Árbol ABB", "Árbol AVL", "Árbol B" }));
+        optionsTree.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Árbol ABB", "Árbol AVL", "Árbol B" }));
 
         btnCreateTree.setText("Crear árbol");
         btnCreateTree.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +148,7 @@ public class FrMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(optionesTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(optionsTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCreateTree))
                             .addComponent(lbQuestionTree))
@@ -199,7 +200,7 @@ public class FrMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(optionesTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(optionsTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCreateTree))
                         .addGap(32, 32, 32)
                         .addComponent(lbQuestionSearch)
@@ -243,9 +244,20 @@ public class FrMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoadDataActionPerformed
 
     private void btnCreateTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateTreeActionPerformed
+        //btnCreateTree
+        arbolPreferido = optionsTree.getSelectedIndex();
         try {
-            //btnCreateTree
-            controlador.crearArbolesABB();
+            switch (arbolPreferido) {
+                case 0:
+                    controlador.crearArbolesABB();
+                    break;
+                case 1:
+                    controlador.crearArbolesAVL();
+                    break;
+                case 2:
+                    JOptionPane.showMessageDialog(null, "Todavía no está listo");
+                    break;
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
         }
@@ -253,27 +265,55 @@ public class FrMenu extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //btnSearch
-        String busqueda = null;
+        modeloCoincidencias.setColumnCount(0);
+        modeloCoincidencias.setRowCount(0);
+        String busqueda = "";
         try {
             if(rbName.isSelected()){
                 busqueda = txtName.getText();
-                controlador.treeCreatedSearch(busqueda, controlador.getArbolABBNombres());
-                controlador.imprimirEnTabla(modeloCoincidencias, busqueda, controlador.getArbolABBNombres());
+                switch (arbolPreferido) {
+                    case 0:
+                        controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBNombres(), modeloCoincidencias);
+                        break;
+                    case 1:
+                        controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLNombres(), modeloCoincidencias);
+                        break;
+                    case 2:
+                        //reservado para nombres del arbolB
+                        break;
+                }
             }
             else if(rbAverage.isSelected()){
                 busqueda = txtAverage.getText();
-                controlador.treeCreatedSearch(busqueda, controlador.getArbolABBPromedio());
-                controlador.imprimirEnTabla(modeloCoincidencias, busqueda, controlador.getArbolABBPromedio());
+                switch (arbolPreferido) {
+                    case 0:
+                        controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBPromedio(), modeloCoincidencias);
+                        break;
+                    case 1:
+                        controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLPromedio(), modeloCoincidencias);
+                        break;
+                    case 2:
+                        //reservado para promedios del arbolB
+                        break;
+                }
             }
             else if (rbDegree.isSelected()) {
                 busqueda = txtDegree.getText();
-                controlador.treeCreatedSearch(busqueda, controlador.getArbolABBProfesion());
-                controlador.imprimirEnTabla(modeloCoincidencias, busqueda, controlador.getArbolABBProfesion());
+                switch (arbolPreferido) {
+                    case 0:
+                        controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBProfesion(), modeloCoincidencias);
+                        break;
+                    case 1:
+                        controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLProfesion(), modeloCoincidencias);
+                        break;
+                    case 2:
+                        //reservado para profesiones del arbolB
+                        break;
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda");
             }
-            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, busqueda + " no fue encontrado dentro del árbol");
         }
@@ -327,7 +367,7 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lbTimeExecute;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbTotalCompares;
-    private javax.swing.JComboBox<String> optionesTree;
+    private javax.swing.JComboBox<String> optionsTree;
     private javax.swing.JRadioButton rbAverage;
     private javax.swing.JRadioButton rbDegree;
     private javax.swing.JRadioButton rbName;

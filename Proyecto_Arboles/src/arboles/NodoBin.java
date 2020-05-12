@@ -16,14 +16,17 @@ public class NodoBin {
     protected NodoBin izq;
     protected NodoBin der;
 
-    public NodoBin(String dato, NodoBin izq, NodoBin der) {
+    public NodoBin(String dato, int number, NodoBin izq, NodoBin der) {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
+        this.referencia.add(number);
     }
 
     public NodoBin(String dato, int number){
-       this(dato,null,null);
+       this.dato= dato;
+       this.izq=null;
+       this.der=null;
        this.referencia.add(number);
     }
     

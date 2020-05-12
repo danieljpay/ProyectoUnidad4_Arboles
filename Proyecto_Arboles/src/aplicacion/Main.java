@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) throws IOException, Exception {
         Controller controlador = new Controller();
         FrMenu menuPrincipal = new FrMenu(controlador);
-        menuPrincipal.setVisible(true);   
+        menuPrincipal.setVisible(true);
     }
     
 }

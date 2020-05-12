@@ -111,11 +111,9 @@ public class ArbolABB {
     }
   
     private ArrayList buscar(NodoBin n, String o) throws ItemNotFoundException{
-        ArrayList referencias = null;
-        ArrayList finish = null;
         
         if(o.compareTo( n.getDato() ) == 0){
-            referencias = n.getReferencia();
+            searched = n.getReferencia();
         }
         if (o.compareTo( n.getDato() ) > 0 ){
             if (n.getIzq()==null){
