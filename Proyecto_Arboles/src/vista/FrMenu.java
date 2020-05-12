@@ -270,6 +270,9 @@ public class FrMenu extends javax.swing.JFrame {
                 controlador.treeCreatedSearch(busqueda, controlador.getArbolABBProfesion());
                 controlador.imprimirEnTabla(modeloCoincidencias, busqueda, controlador.getArbolABBProfesion());
             }
+            else{
+                JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda");
+            }
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, busqueda + " no fue encontrado dentro del árbol");

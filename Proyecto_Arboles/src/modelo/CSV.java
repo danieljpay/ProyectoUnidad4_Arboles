@@ -45,10 +45,11 @@ public class CSV {
                 linea = bufferLectura.readLine();
             }
             bufferLectura.close();
-            System.out.println("Datos cargados");
+            System.out.println("Datos cargados\n");
             JOptionPane.showMessageDialog(null, "Datos cargados correctamente");
         }
         catch(IOException e){
+            System.out.println("No se pudieron cargar los datos\n");
             JOptionPane.showMessageDialog(null, "No se pudieron cargar los archivos, revisa la ruta");
         }
     }
