@@ -52,25 +52,26 @@ public class Raiz
     }
     
     public void ordenar(String arr[], int longitud){
-       longitud = 0;
-       for(int i = 0; i < arr.length; i++){
-           if(arr[i] != null){
+        longitud = 0;
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] != null){
                longitud++;
-            }else{
-            break;
+            }
+            else{
+                break;
             }
         }
-             for(int ord = 0; ord < longitud; ord++){
+        for(int ord = 0; ord < longitud; ord++){
             for(int ord1 = 0; ord1 < longitud - 1 ; ord1++){
-             if(arr[ord1].compareTo( arr[ord1 + 1] ) < 0){
-                        String tmp = arr[ord1];
-                        arr[ord1] = arr[ord1+1];
-                        arr[ord1+1] = tmp;
-                      
-              }
-           }
-       }
+                if(arr[ord1].compareTo( arr[ord1 + 1] ) < 0){
+                    String tmp = arr[ord1];
+                    arr[ord1] = arr[ord1+1];
+                    arr[ord1+1] = tmp;
+                }
+            }
+        }
     }
+    
     public void setTengoHijos (Nodo nodo) {
         if (nodo == primerNodo) {
             if (primerNodo.nodo[0]!= null) {
@@ -84,6 +85,7 @@ public class Raiz
             }
         }
     }
+    
     public void ingresarEnHijos(Nodo conHijos, String valor) {
         boolean entro = false;
         if(conHijos != null && !conHijos.tengoHijos){
@@ -91,11 +93,9 @@ public class Raiz
             entro = true;
         }
         for(int i = 0; conHijos != null && i < 2*grado + 1  && !entro; i++){
-            if(valor.compareTo( conHijos.valores[i] ) > 0 || conHijos.valores[i] == null){
-                entro = true;
-                ingresarEnHijos(conHijos.nodo[i], valor);
-                i = 2*grado;
-            }
+            entro = true;
+            ingresarEnHijos(conHijos.nodo[i], valor);
+            i = 2*grado;
         } 
     }
     
@@ -192,7 +192,7 @@ public class Raiz
             nodo.padre.nodo[posHijos+1].padre = nodo.padre;
             int aqui = 0;
             for (int i =0; i<2*grado+3 && nodo.padre.nodo[i]!=null; i++) {
-                if (nodo.padre.nodo[i].valores[0].compareTo( nodo.valores[0] ) == 0 ) {
+                if (nodo.padre.nodo[i].valores[0] == nodo.valores[0]) {
                     aqui = i;
                     break;
                 }
