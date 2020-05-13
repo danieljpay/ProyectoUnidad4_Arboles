@@ -11,6 +11,7 @@ public class Interfaz2 extends javax.swing.JFrame {
     boolean ya = false;
     boolean existe = false;
     Raiz raizAux = new Raiz(2);
+    
     public Interfaz2() {
         initComponents();
     }
@@ -268,23 +269,17 @@ public class Interfaz2 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //btnBuscar
         if(!jTextField2.getText().equals("")){
-            boolean numero = raizAux.esNumero(jTextField2.getText());
-            if(numero){
-                if(ya){
-                    boolean esta = raiz1.buscar(Integer.parseInt(jTextField2.getText()));
-                    if(esta){
-                        JOptionPane.showMessageDialog(this, "El elemento " + jTextField2.getText() + " SI se encuentra en el arbol B", "Dato encontrado!!!", JOptionPane.WARNING_MESSAGE);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(this, "El elemento " + jTextField2.getText() + " NO se encuentra en el arbol B", "Dato no encontrado!!!", JOptionPane.WARNING_MESSAGE);
-                    }
+            if(ya){
+                boolean esta = raiz1.buscar(jTextField2.getText());
+                if(esta){
+                    JOptionPane.showMessageDialog(this, "El elemento " + jTextField2.getText() + " SI se encuentra en el arbol B", "Dato encontrado!!!", JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    JOptionPane.showMessageDialog(this, "Aun no ha creado un arbol", "Error!!", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "El elemento " + jTextField2.getText() + " NO se encuentra en el arbol B", "Dato no encontrado!!!", JOptionPane.WARNING_MESSAGE);
                 }
             }
             else{
-                JOptionPane.showMessageDialog(this, "Ingrese numeros entero diferentes de 0", "Error!!", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Aun no ha creado un arbol", "Error!!", JOptionPane.WARNING_MESSAGE);
             }
         }
         else{
@@ -298,8 +293,10 @@ public class Interfaz2 extends javax.swing.JFrame {
         raiz1.arbol = "";
         if(ya){
             String raiz = "raiz [ ";
-            for(int i = 0; i < raiz1.primerNodo.valores.length && raiz1.primerNodo.valores[i] != 0; i++){
-                raiz += raiz1.primerNodo.valores[i] + ", ";
+            for(int i = 0; i < raiz1.primerNodo.valores.length; i++){
+                if(raiz1.primerNodo.valores[i] != null){
+                    raiz += raiz1.primerNodo.valores[i] + ", ";
+                }
             }
             raiz += " ]\n";
             raiz += raiz1.llamarRecorrer();
@@ -338,46 +335,34 @@ public class Interfaz2 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //btnIngresarArbol
         if(!jTextField1.getText().equals("")){
-            boolean numero = raizAux.esNumero(jTextField1.getText());
-            if(numero){
-                boolean adentro = false;
-                if(existe){
-                    for(int i = 0; i < datos.ingresados.size(); i++){
-                        if(datos.ingresados.get(i) == Integer.parseInt(jTextField1.getText())){
-                            adentro = true;
-                        }
+            boolean adentro = false;
+            if(existe){
+                for(int i = 0; i < datos.ingresados.size(); i++){
+                    if(datos.ingresados.get(i).compareTo( jTextField1.getText() ) == 0){
+                        adentro = true;
                     }
                 }
-                if(!adentro){
-                    if(!jTextField1.getText().equals("")){
-                        if(!jTextField1.getText().equals("0")){ 
-                            if(ya){    
-                                raiz1.insertar(Integer.parseInt(jTextField1.getText()));
-                                JOptionPane.showMessageDialog(this, "El elemento " + jTextField1.getText() + " fue ingresado al arbol B exitosamente", "Novedad", JOptionPane.WARNING_MESSAGE);
-                            }
-                            else{
-                                JOptionPane.showMessageDialog(this, "Aun no ha creado un arbol", "Error!!", JOptionPane.WARNING_MESSAGE);
-                            }
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(this, "Ingrese datos diferentes de 0", "Error!!", JOptionPane.WARNING_MESSAGE);
-                        }   
-            
+            }
+            if(!adentro){
+                if(!jTextField1.getText().equals("")){
+                    if(ya){    
+                        raiz1.insertar(jTextField1.getText());
+                        JOptionPane.showMessageDialog(this, "El elemento " + jTextField1.getText() + " fue ingresado al arbol B exitosamente", "Novedad", JOptionPane.WARNING_MESSAGE);
                     }
                     else{
-                        JOptionPane.showMessageDialog(this, "Ingrese datos en el campo", "Error!!", JOptionPane.WARNING_MESSAGE); 
+                        JOptionPane.showMessageDialog(this, "Aun no ha creado un arbol", "Error!!", JOptionPane.WARNING_MESSAGE);
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(this, "El elemento ya habia sido ingresado previamente", "Error!!", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Ingrese datos en el campo", "Error!!", JOptionPane.WARNING_MESSAGE); 
                 }
             }
             else{
-                JOptionPane.showMessageDialog(this, "Ingrese numeros enteros diferentes de 0", "Error!!", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El elemento ya habia sido ingresado previamente", "Error!!", JOptionPane.WARNING_MESSAGE);
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Ingrese datos en el campo", "Error!!", JOptionPane.WARNING_MESSAGE);   
+            JOptionPane.showMessageDialog(this, "Ingrese numeros enteros diferentes de 0", "Error!!", JOptionPane.WARNING_MESSAGE);
         }
         jTextField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -390,11 +375,11 @@ public class Interfaz2 extends javax.swing.JFrame {
             if(numero){
                 if(ya){
                     for(int i = 0; i < datos.ingresados.size(); i++){
-                        if(datos.ingresados.get(i) == Integer.parseInt(jTextField3.getText())){
+                        if(datos.ingresados.get(i).compareTo( jTextField3.getText() ) == 0){
                             esta = true;
                         }
                     }    
-                    raiz1.eliminar(Integer.parseInt(jTextField3.getText()));
+                    raiz1.eliminar(jTextField3.getText());
                     if(esta){
                         JOptionPane.showMessageDialog(this, "El elemento " + jTextField3.getText() + " fue eliminado exitosamente", "Novedad", JOptionPane.WARNING_MESSAGE);
                     }

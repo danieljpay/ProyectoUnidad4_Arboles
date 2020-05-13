@@ -29,11 +29,11 @@ public class Raiz
         esRaiz = true;
     }
     
-    public void insertar (int valor) {
+    public void insertar (String valor) {
         if (primerNodo.tengoHijos==false) {
             int j = 0;
             for (int i = 0; i<primerNodo.valores.length; i++) {
-                if (primerNodo.valores[i] == 0) {
+                if (primerNodo.valores[i] == null) {
                     primerNodo.valores[i] = valor;
                     Lista.ingresados.add(valor);
                     j = i;
@@ -50,10 +50,11 @@ public class Raiz
             
         }
     }
-      public void ordenar(int arr[], int longitud){
+    
+    public void ordenar(String arr[], int longitud){
        longitud = 0;
        for(int i = 0; i < arr.length; i++){
-           if(arr[i] != 0){
+           if(arr[i] != null){
                longitud++;
             }else{
             break;
@@ -61,8 +62,8 @@ public class Raiz
         }
              for(int ord = 0; ord < longitud; ord++){
             for(int ord1 = 0; ord1 < longitud - 1 ; ord1++){
-             if(arr[ord1] > arr[ord1 + 1]){
-                        int tmp = arr[ord1];
+             if(arr[ord1].compareTo( arr[ord1 + 1] ) < 0){
+                        String tmp = arr[ord1];
                         arr[ord1] = arr[ord1+1];
                         arr[ord1+1] = tmp;
                       
@@ -83,24 +84,25 @@ public class Raiz
             }
         }
     }
-    public void ingresarEnHijos(Nodo conHijos, int valor) {
+    public void ingresarEnHijos(Nodo conHijos, String valor) {
         boolean entro = false;
         if(conHijos != null && !conHijos.tengoHijos){
             ubicarValorEnArreglo(conHijos, valor);
             entro = true;
         }
         for(int i = 0; conHijos != null && i < 2*grado + 1  && !entro; i++){
-            if(valor < conHijos.valores[i] || conHijos.valores[i] == 0){
+            if(valor.compareTo( conHijos.valores[i] ) > 0 || conHijos.valores[i] == null){
                 entro = true;
                 ingresarEnHijos(conHijos.nodo[i], valor);
                 i = 2*grado;
             }
         } 
     }
-    public void ubicarValorEnArreglo(Nodo nodoA, int valor){
+    
+    public void ubicarValorEnArreglo(Nodo nodoA, String valor){
         int cont = 0;
         while(cont <= 2*grado){
-            if (nodoA.valores[cont]==0) { 
+            if (nodoA.valores[cont] == null) { 
                 nodoA.valores[cont]=valor;
                 ordenar(nodoA.valores, 5);
                 Lista.ingresados.add(valor);
@@ -112,7 +114,8 @@ public class Raiz
             cont++;
         }
     }
-     public void ordenarNodos(Nodo aOrdenar){
+    
+    public void ordenarNodos(Nodo aOrdenar){
        int i,j;
        i = 0;
        Nodo tmp;
@@ -120,7 +123,7 @@ public class Raiz
        while(i < 2 * grado + 3 && aOrdenar.nodo[i] != null){
            j = 0;
            while(j < 2 * grado +2  && aOrdenar.nodo[j] != null && aOrdenar.nodo[j+1] != null){
-               if(aOrdenar.nodo[j].valores[0] > aOrdenar.nodo[j+1].valores[0] ){
+               if(aOrdenar.nodo[j].valores[0].compareTo( aOrdenar.nodo[j+1].valores[0] ) < 0){
                    tmp = aOrdenar.nodo[j];
                    aOrdenar.nodo[j] = aOrdenar.nodo[j+1];
                    aOrdenar.nodo[j+1] = tmp;
@@ -130,6 +133,7 @@ public class Raiz
             i++;
         }   
     }
+    
     public void split (Nodo nodo) {
        
         Nodo hijoIzq = new Nodo();
@@ -149,12 +153,12 @@ public class Raiz
 
         for (int i =0; i<grado; i++){ //guarda los valores en hijoIzq e hijoDer
             hijoIzq.valores[i] = nodo.valores[i];
-            nodo.valores[i] = 0;
+            nodo.valores[i] = null;
             hijoDer.valores[i] = nodo.valores[grado+1+i];
-            nodo.valores[grado+1+i] = 0;
+            nodo.valores[grado+1+i] = null;
         }
         nodo.valores[0] = nodo.valores[grado];
-        nodo.valores[grado] = 0; //queda en nodo solo el valor que "subio"
+        nodo.valores[grado] = null; //queda en nodo solo el valor que "subio"
         
         nodo.nodo[0] = hijoIzq; //asigna a nodo el nuevo hijo izquierdo (hijoIzq)
         nodo.nodo[0].padre = nodo; // se hizo en primer ciclo
@@ -167,10 +171,10 @@ public class Raiz
         if (nodo.padre!=null) { // luego del split y asignar los hijos (hijoIzq, hijoDer), subir el valor al padre
             boolean subido = false;
             for (int i = 0; i<nodo.padre.valores.length && subido==false; i++) {
-                if (nodo.padre.valores[i] == 0) {
+                if (nodo.padre.valores[i] == null){
                     nodo.padre.valores[i] = nodo.valores[0];
                     subido = true;
-                    nodo.valores[0] = 0;
+                    nodo.valores[0] = null;
                     ordenar(nodo.padre.valores, 5);
                 }
             }
@@ -188,7 +192,7 @@ public class Raiz
             nodo.padre.nodo[posHijos+1].padre = nodo.padre;
             int aqui = 0;
             for (int i =0; i<2*grado+3 && nodo.padre.nodo[i]!=null; i++) {
-                if (nodo.padre.nodo[i].valores[0] == nodo.valores[0]) {
+                if (nodo.padre.nodo[i].valores[0].compareTo( nodo.valores[0] ) == 0 ) {
                     aqui = i;
                     break;
                 }
@@ -203,16 +207,16 @@ public class Raiz
             papa.nodo[j] = null;
             ordenar(papa.valores,5);
             ordenarNodos(papa);
-            if (papa.valores[2*grado]!=0) {
+            if (papa.valores[2*grado] != null) {
                 split(papa);
             }
         }
     }
-       public void eliminar(int valor) { //elimina de la lista el valor y vuelve a crear el arbol
+       public void eliminar(String valor) { //elimina de la lista el valor y vuelve a crear el arbol
         boolean encontrado = false;
         int j = 0;
         for (int i=0; i<Lista.ingresados.size() && !encontrado; i++) {
-            if (Lista.ingresados.get(i) == valor) {
+            if (Lista.ingresados.get(i).compareTo( valor ) == 0) {
                 encontrado = true;
                 j = i;
             }
@@ -222,20 +226,20 @@ public class Raiz
         } else {
             System.out.println("El valor a eliminar no se encuentra en el arbol B");
         }
-        ArrayList<Integer> auxiliar = Lista.ingresados;
-        Lista.ingresados = new ArrayList<Integer>();
+        ArrayList<String> auxiliar = Lista.ingresados;
+        Lista.ingresados = new ArrayList<String>();
         primerNodo = new Nodo();
         primerNodo.tengoHijos = false;
         for(int k = 0; k < auxiliar.size(); k++){
-            Integer y = auxiliar.get(k);
-            int o = y.intValue();
+            String y = auxiliar.get(k);
+            String o = y;
             insertar(o);
         }
     }
-    public boolean buscar(int valor){
+    public boolean buscar(String valor){
         boolean esta = false;
         for(int i = 0; i < Lista.ingresados.size() && !esta; i++){
-            if(Lista.ingresados.get(i) == valor){
+            if(Lista.ingresados.get(i).compareTo(valor) == 0){
                 esta = true;
                 System.out.println("El elemento buscado si se encuentra en el arbol B");
                 return esta;
@@ -258,7 +262,7 @@ public class Raiz
             }
             arbol += "[ ";
             for (int j = 0; nodo.nodo[i]!=null && j<nodo.nodo[i].valores.length; j++) {
-                if (nodo.nodo[i].valores[j] != 0) {
+                if (nodo.nodo[i].valores[j] != null) {
                     arbol += nodo.nodo[i].valores[j] + ", ";
                 }
             }
@@ -276,13 +280,13 @@ public class Raiz
         imprimir = 1;
         return arbol;
     }
-     public boolean esNumero(String s){
-        try{
-           Integer.parseInt(s);
-           return true;
-        }catch(NumberFormatException e){
-            return false;
-        }
-        }
-        
+    
+    public boolean esNumero(String s){
+    try{
+       Integer.parseInt(s);
+       return true;
+    }catch(NumberFormatException e){
+        return false;
+    }
+    }
 }
