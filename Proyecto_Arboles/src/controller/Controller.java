@@ -56,10 +56,12 @@ public class Controller {
     
     //comparacion de arraylist
     public ArrayList compareReference(ArrayList referenceOne, ArrayList referenceTwo){
-        ArrayList coincidencias = null;
-        for (int i = 0; i < 10; i++) {  //recorrer el arraylist
-            if (true) {     //si son iguales
-                //lo guardo en coincidencias
+        ArrayList coincidencias = new ArrayList();
+        for (int i = 0; i < referenceOne.size(); i++) {  //recorrer el arraylist
+            for (int j = 0; j < referenceTwo.size(); j++) {
+                if (referenceOne.get(i)==referenceTwo.get(j)) {     //si son iguales
+                   coincidencias.add(referenceTwo.get(j));//lo guardo en coincidencias
+                }   
             }
         }
         return coincidencias;
