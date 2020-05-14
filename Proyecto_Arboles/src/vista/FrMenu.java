@@ -18,6 +18,7 @@ public class FrMenu extends javax.swing.JFrame {
     Controller controlador;
     DefaultTableModel modeloCoincidencias;
     int arbolPreferido;
+    boolean datosCargados=false;
     /**
      * Creates new form FrMenu
      */
@@ -26,7 +27,6 @@ public class FrMenu extends javax.swing.JFrame {
         this.controlador = controlador;
         this.setLocationRelativeTo(null);
         modeloCoincidencias = new DefaultTableModel();
-        tbCoincidences.setModel(modeloCoincidencias);
     }
           
     /**
@@ -233,6 +233,7 @@ public class FrMenu extends javax.swing.JFrame {
         try {
             controlador.getDatos().readCSV(txtDirection.getText(), controlador.getMatriculados()); 
             txtDirection.setText("");
+            datosCargados=controlador.getDatos().confirmacionDatosCargados();
         } 
         catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "No se pudieron cargar los datos, revisa la ruta");
@@ -241,78 +242,91 @@ public class FrMenu extends javax.swing.JFrame {
 
     private void btnCreateTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateTreeActionPerformed
         //btnCreateTree
-        arbolPreferido = optionsTree.getSelectedIndex();
-        try {
-            switch (arbolPreferido) {
-                case 0:
-                    controlador.crearArbolesABB();
-                    break;
-                case 1:
-                    controlador.crearArbolesAVL();
-                    break;
-                case 2:
-                    controlador.crearArbolesB();
-                    break;
+        if (datosCargados) {
+            arbolPreferido = optionsTree.getSelectedIndex();
+            try {
+                switch (arbolPreferido) {
+                    case 0:
+                        controlador.crearArbolesABB();
+                        break;
+                    case 1:
+                        controlador.crearArbolesAVL();
+                        break;
+                    case 2:
+                        controlador.crearArbolesB();
+                        break;
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
+                ex.printStackTrace();
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
-            ex.printStackTrace();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Brother, primero ingresa los datos, \n seas mamón", "no te pases de berga", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnCreateTreeActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //btnSearch
-        modeloCoincidencias.setColumnCount(0);
-        modeloCoincidencias.setRowCount(0);
-        String busqueda = "";
-        try {
-            if(rbName.isSelected()){
-                busqueda = txtName.getText();
-                switch (arbolPreferido) {
-                    case 0:
-                        controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBNombres(), modeloCoincidencias);
-                        break;
-                    case 1:
-                        controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLNombres(), modeloCoincidencias);
-                        break;
-                    case 2:
-                        controlador.treeBCreatedSearch(busqueda, controlador.getArbolBNombres(), modeloCoincidencias);
-                        break;
+        if (datosCargados) {
+            modeloCoincidencias.setColumnCount(0);
+            modeloCoincidencias.setRowCount(0);
+            String busqueda = "";
+            try {
+                if(rbName.isSelected()){
+                    busqueda = txtName.getText();
+                    switch (arbolPreferido) {
+                        case 0:
+                            controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBNombres(), modeloCoincidencias);
+                            break;
+                        case 1:
+                            controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLNombres(), modeloCoincidencias);
+                            break;
+                        case 2:
+                            controlador.treeBCreatedSearch(busqueda, controlador.getArbolBNombres(), modeloCoincidencias);
+                            break;
+                    }
+                    tbCoincidences.setModel(modeloCoincidencias);
                 }
-            }
-            else if(rbAverage.isSelected()){
-                busqueda = txtAverage.getText();
-                switch (arbolPreferido) {
-                    case 0:
-                        controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBPromedio(), modeloCoincidencias);
-                        break;
-                    case 1:
-                        controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLPromedio(), modeloCoincidencias);
-                        break;
-                    case 2:
-                        controlador.treeBCreatedSearch(busqueda, controlador.getArbolBPromedio(), modeloCoincidencias);
-                        break;
+                else if(rbAverage.isSelected()){
+                    busqueda = txtAverage.getText();
+                    switch (arbolPreferido) {
+                        case 0:
+                            controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBPromedio(), modeloCoincidencias);
+                            break;
+                        case 1:
+                            controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLPromedio(), modeloCoincidencias);
+                            break;
+                        case 2:
+                            controlador.treeBCreatedSearch(busqueda, controlador.getArbolBPromedio(), modeloCoincidencias);
+                            break;
+                    }
+                    tbCoincidences.setModel(modeloCoincidencias);
                 }
-            }
-            else if (rbDegree.isSelected()) {
-                busqueda = txtDegree.getText();
-                switch (arbolPreferido) {
-                    case 0:
-                        controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBProfesion(), modeloCoincidencias);
-                        break;
-                    case 1:
-                        controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLProfesion(), modeloCoincidencias);
-                        break;
-                    case 2:
-                        controlador.treeBCreatedSearch(busqueda, controlador.getArbolBProfesion(), modeloCoincidencias);
-                        break;
+                else if (rbDegree.isSelected()) {
+                    busqueda = txtDegree.getText();
+                    switch (arbolPreferido) {
+                        case 0:
+                            controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBProfesion(), modeloCoincidencias);
+                            break;
+                        case 1:
+                            controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLProfesion(), modeloCoincidencias);
+                            break;
+                        case 2:
+                            controlador.treeBCreatedSearch(busqueda, controlador.getArbolBProfesion(), modeloCoincidencias);
+                            break;
+                    }
+                    tbCoincidences.setModel(modeloCoincidencias);
                 }
+                else{
+                    JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, busqueda + " no fue encontrado dentro del árbol");
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, busqueda + " no fue encontrado dentro del árbol");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Brother, primero ingresa los datos, \n seas mamón", "no te pases de berga", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 

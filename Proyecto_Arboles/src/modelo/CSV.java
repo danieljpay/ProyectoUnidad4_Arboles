@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
  * @author plupy
  */
 public class CSV {
+    boolean cargadoCorrectamente=false;
+    
     public void readCSV(String ruta, ListaSimpleLigada destino) throws IOException{
         /*  fuente:  thttp://www.programandoapasitos.com/2017/04/como-leer-fichero-csv-con-java.htmlhtp://www.programandoapasitos.com/2017/04/como-leer-fichero-csv-con-java.html */
         String separator = ",";
@@ -44,10 +46,16 @@ public class CSV {
             bufferLectura.close();
             System.out.println("Datos cargados\n");
             JOptionPane.showMessageDialog(null, "Datos cargados correctamente");
+            cargadoCorrectamente = true;
         }
         catch(IOException e){
             System.out.println("No se pudieron cargar los datos\n");
+            cargadoCorrectamente = false;
             JOptionPane.showMessageDialog(null, "No se pudieron cargar los archivos, revisa la ruta");
         }
+    }
+    
+    public boolean confirmacionDatosCargados(){
+        return cargadoCorrectamente;
     }
 }
