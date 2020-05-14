@@ -255,11 +255,12 @@ public class FrMenu extends javax.swing.JFrame {
                     controlador.crearArbolesAVL();
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(null, "Todavía no está listo");
+                    controlador.crearArbolesB();
                     break;
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_btnCreateTreeActionPerformed
 
@@ -279,7 +280,7 @@ public class FrMenu extends javax.swing.JFrame {
                         controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLNombres(), modeloCoincidencias);
                         break;
                     case 2:
-                        //reservado para nombres del arbolB
+                        controlador.treeBCreatedSearch(busqueda, controlador.getArbolBNombres(), modeloCoincidencias);
                         break;
                 }
             }
@@ -293,7 +294,7 @@ public class FrMenu extends javax.swing.JFrame {
                         controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLPromedio(), modeloCoincidencias);
                         break;
                     case 2:
-                        //reservado para promedios del arbolB
+                        controlador.treeBCreatedSearch(busqueda, controlador.getArbolBPromedio(), modeloCoincidencias);
                         break;
                 }
             }
@@ -307,7 +308,7 @@ public class FrMenu extends javax.swing.JFrame {
                         controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLProfesion(), modeloCoincidencias);
                         break;
                     case 2:
-                        //reservado para profesiones del arbolB
+                        controlador.treeBCreatedSearch(busqueda, controlador.getArbolBProfesion(), modeloCoincidencias);
                         break;
                 }
             }

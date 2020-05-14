@@ -13,7 +13,7 @@ import java.util.*;
  * @version (a version number or a date)
  */
 
-public class Raiz
+public class ArbolB
 {
     public static int grado;
     public Nodo primerNodo;
@@ -21,33 +21,51 @@ public class Raiz
     public static int nivel = 1;
     public static int imprimir = 1;
     public static String arbol = "";
+    public ArrayList<Integer> tempArray = new ArrayList<Integer>();
+    public ArrayList<String> ingresados = new ArrayList<String>();
+    public ArrayList<ArrayList<Integer>> referencias = new ArrayList<ArrayList<Integer>>();
+    int indexRef = 0;
     
-    public Raiz(int grado){
+    public ArbolB(int grado){
         this.grado = grado;
         primerNodo = new Nodo ();
         Lista llevarIngresos = new Lista();
         esRaiz = true;
     }
     
-    public void insertar (String valor) {
-        if (primerNodo.tengoHijos==false) {
-            int j = 0;
-            for (int i = 0; i<primerNodo.valores.length; i++) {
-                if (primerNodo.valores[i] == null) {
-                    primerNodo.valores[i] = valor;
-                    Lista.ingresados.add(valor);
-                    j = i;
-                    ordenar(primerNodo.valores,6);
-                    break;
+    public void insertar (String valor, int n) {
+        boolean adentro = false;
+        for (int i = 0; i < ingresados.size(); i++) {
+            if(valor.compareTo(ingresados.get(i)) == 0){
+                tempArray = referencias.get(i);
+                tempArray.add(n);
+                referencias.set(i, tempArray);
+                tempArray.clear();
+                adentro=true;
+            }
+        }
+        if (!adentro) {
+            if (primerNodo.tengoHijos==false) {
+                int j = 0;
+                for (int i = 0; i<primerNodo.valores.length; i++) {
+                    if (primerNodo.valores[i] == null) {
+                       primerNodo.valores[i] = valor;
+                       ingresados.add(valor);
+                       tempArray.add(n);
+                       referencias.add(tempArray);    //aqui esta el error que no me deja crear el arbol
+                       tempArray.clear();
+                       j = i;
+                       ordenar(primerNodo.valores,6);
+                       break;
+                    }
                 }
-            }
-            if (j == 2*grado) {
-                split(primerNodo);
-            }
-        } else {
-            setTengoHijos(primerNodo);
-            ingresarEnHijos(primerNodo, valor);
-            
+                if (j == 2*grado) {
+                    split(primerNodo);
+                }
+            } else {
+                setTengoHijos(primerNodo);
+                ingresarEnHijos(primerNodo, valor, n);
+            }   
         }
     }
     
@@ -86,26 +104,29 @@ public class Raiz
         }
     }
     
-    public void ingresarEnHijos(Nodo conHijos, String valor) {
+    public void ingresarEnHijos(Nodo conHijos, String valor, int n) {
         boolean entro = false;
         if(conHijos != null && !conHijos.tengoHijos){
-            ubicarValorEnArreglo(conHijos, valor);
+            ubicarValorEnArreglo(conHijos, valor, n);
             entro = true;
         }
         for(int i = 0; conHijos != null && i < 2*grado + 1  && !entro; i++){
             entro = true;
-            ingresarEnHijos(conHijos.nodo[i], valor);
+            ingresarEnHijos(conHijos.nodo[i], valor, n);
             i = 2*grado;
         } 
     }
     
-    public void ubicarValorEnArreglo(Nodo nodoA, String valor){
+    public void ubicarValorEnArreglo(Nodo nodoA, String valor, int n){
         int cont = 0;
         while(cont <= 2*grado){
             if (nodoA.valores[cont] == null) { 
                 nodoA.valores[cont]=valor;
                 ordenar(nodoA.valores, 5);
-                Lista.ingresados.add(valor);
+                ingresados.add(valor);
+                tempArray.add(n);
+                referencias.add(tempArray);
+                tempArray.clear();
                 if (cont == 2*grado) {
                     split(nodoA);
                 }
@@ -191,12 +212,7 @@ public class Raiz
             nodo.padre.nodo[posHijos].padre = nodo.padre;
             nodo.padre.nodo[posHijos+1].padre = nodo.padre;
             int aqui = 0;
-            for (int i =0; i<2*grado+3 && nodo.padre.nodo[i]!=null; i++) {
-                if (nodo.padre.nodo[i].valores[0] == nodo.valores[0]) {
-                    aqui = i;
-                    break;
-                }
-            }
+            
             Nodo papa = nodo.padre;
             nodo = null;
             int j = aqui;
@@ -212,43 +228,32 @@ public class Raiz
             }
         }
     }
-       public void eliminar(String valor) { //elimina de la lista el valor y vuelve a crear el arbol
-        boolean encontrado = false;
-        int j = 0;
-        for (int i=0; i<Lista.ingresados.size() && !encontrado; i++) {
-            if (Lista.ingresados.get(i).compareTo( valor ) == 0) {
-                encontrado = true;
-                j = i;
-            }
-        }
-        if (encontrado==true) {
-            Lista.ingresados.remove(j);
-        } else {
-            System.out.println("El valor a eliminar no se encuentra en el arbol B");
-        }
-        ArrayList<String> auxiliar = Lista.ingresados;
-        Lista.ingresados = new ArrayList<String>();
-        primerNodo = new Nodo();
-        primerNodo.tengoHijos = false;
-        for(int k = 0; k < auxiliar.size(); k++){
-            String y = auxiliar.get(k);
-            String o = y;
-            insertar(o);
-        }
-    }
-    public boolean buscar(String valor){
+      
+    public ArrayList<Integer> buscar(String valor){
+        ArrayList<Integer> encontrados = null;
         boolean esta = false;
-        for(int i = 0; i < Lista.ingresados.size() && !esta; i++){
-            if(Lista.ingresados.get(i).compareTo(valor) == 0){
+        for(int i = 0; i < ingresados.size(); i++){
+            if(ingresados.get(i).compareTo(valor) == 0){
                 esta = true;
-                System.out.println("El elemento buscado si se encuentra en el arbol B");
-                return esta;
+                System.out.println("El elemento buscado sí se encuentra en el arbol B");
+                encontrados = referencias.get(i);
+                return encontrados;
             }
         }
         System.out.println("El elemento buscado no se encuentra en el arbol B");
-        return false;
+        return encontrados;
     }
+    
     public String recorrer(Nodo nodo) {
+        String raiz = "raiz [ ";
+        for(int i = 0; i < primerNodo.valores.length; i++){
+            if(primerNodo.valores[i] != null){
+                raiz += primerNodo.valores[i] + ", ";
+            }
+        }
+        raiz += " ]\n";
+        System.out.println(raiz);
+        
          arbol += "\n";
         for (int i =0; i<2*grado+1; i++) {
             if (nodo.nodo[i] != null) {

@@ -7,6 +7,7 @@ package controller;
 
 import arboles.ArbolABB;
 import arboles.ArbolAVL;
+import arboles.ArbolB;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.CSV;
@@ -27,7 +28,10 @@ public class Controller {
     ArbolAVL arbolitoAVLProfesion;
     ArbolAVL arbolitoAVLPromedio;
     
-
+    ArbolB arbolitoBNombres;
+    ArbolB arbolitoBProfesion;
+    ArbolB arbolitoBPromedio;
+    
     //constructor
     public Controller() {
     }
@@ -67,7 +71,7 @@ public class Controller {
         }
     }*/
     
-    //*********************************arbolABB********************************
+    //*********************************arbol ABB********************************
     
     public void crearArbolesABB() throws Exception{
         int temp=0;
@@ -136,7 +140,7 @@ public class Controller {
         }   
     }
     
-    //***********************************arbolAVL********************************************
+    //***********************************arbol AVL********************************************
     
     public void crearArbolesAVL() throws Exception{
         int temp=0;
@@ -173,6 +177,73 @@ public class Controller {
     }
     
     public void treeAVLCreatedSearch(String nombre, ArbolAVL arbolito, DefaultTableModel modelito) throws Exception{
+        try{
+            String cadena = "";
+            ArrayList tempArray;
+            tempArray = arbolito.buscar(nombre);
+            for (int i = 0; i < tempArray.size(); i++) {
+                cadena += tempArray.get(i) + " ";
+            }
+            System.out.println(cadena);
+            for (int i = 0; i < tempArray.size(); i++) {
+                System.out.println(matriculados.obt((int)tempArray.get(i)).getEgresado().getNombre() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getProfesion() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getPromedio());
+            }
+            System.out.println("");
+            
+            //impresion en tabla
+            modelito.addColumn("Nombre");
+            modelito.addColumn("Profesión");
+            modelito.addColumn("Promedio");
+            String[] flecha = new String[3];
+            tempArray = arbolito.buscar(nombre);
+            for(int i=0; i<tempArray.size(); i++){
+                flecha[0]=matriculados.obt((int) tempArray.get(i)).getEgresado().getNombre() ;
+                flecha[1]=matriculados.obt((int) tempArray.get(i)).getEgresado().getProfesion();
+                flecha[2]=matriculados.obt((int) tempArray.get(i)).getEgresado().getPromedio()+"";
+                modelito.addRow(flecha);
+            }
+        }
+        catch(Exception e){
+            System.out.println(nombre + " no fue encontrado");
+        }   
+    }
+    
+    //***********************************arbol B********************************************
+    public void crearArbolesB() throws Exception{
+        int temp=0;
+        arbolitoBNombres = new ArbolB(3);
+        arbolitoBPromedio = new ArbolB(3);
+        arbolitoBProfesion = new ArbolB(3);
+        for(int i=0; matriculados.obt(i).getEnlace()!= null; i++){
+            arbolitoBNombres.insertar(matriculados.obt(i).getEgresado().getNombre(), i);
+            arbolitoBProfesion.insertar(matriculados.obt(i).getEgresado().getProfesion(), i);
+            arbolitoBPromedio.insertar(matriculados.obt(i).getEgresado().getPromedio()+"", i);
+            temp=i;
+        }
+        temp++;
+        arbolitoBNombres.insertar(matriculados.obt(temp).getEgresado().getNombre(), temp);
+        arbolitoBProfesion.insertar(matriculados.obt(temp).getEgresado().getProfesion(), temp);
+        arbolitoBPromedio.insertar(matriculados.obt(temp).getEgresado().getPromedio()+"", temp);
+        arbolitoBNombres.llamarRecorrer();
+        System.out.println("------------------");
+        arbolitoBProfesion.llamarRecorrer();
+        System.out.println("------------------");
+        arbolitoBPromedio.llamarRecorrer();
+    }
+    
+    public ArbolB getArbolBNombres(){
+        return arbolitoBNombres;
+    }
+    
+    public ArbolB getArbolBProfesion(){
+        return arbolitoBProfesion;
+    }
+    
+    public ArbolB getArbolBPromedio(){
+        return arbolitoBPromedio;
+    }
+    
+    public void treeBCreatedSearch(String nombre, ArbolB arbolito, DefaultTableModel modelito) throws Exception{
         try{
             String cadena = "";
             ArrayList tempArray;

@@ -4,6 +4,8 @@
  */
 package arboles;
 
+import java.util.ArrayList;
+
 public class Nodo
 {
     public String []valores;
@@ -14,8 +16,8 @@ public class Nodo
     public Nodo padre;
     
     public Nodo(){
-       nodo = new Nodo [Raiz.grado * 2 + 3];
-       valores = new String [Raiz.grado * 2 + 1];
+       nodo = new Nodo [ArbolB.grado * 2 + 3];
+       valores = new String [ArbolB.grado * 2 + 1];
     }
     
 }

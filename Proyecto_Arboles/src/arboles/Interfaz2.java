@@ -7,10 +7,10 @@ import java.util.*;
 import javax.swing.JOptionPane; 
 public class Interfaz2 extends javax.swing.JFrame {
     Lista datos;
-    Raiz raiz1;
+    ArbolB raiz1;
     boolean ya = false;
     boolean existe = false;
-    Raiz raizAux = new Raiz(2);
+    ArbolB raizAux = new ArbolB(2);
     
     public Interfaz2() {
         initComponents();
@@ -314,7 +314,7 @@ public class Interfaz2 extends javax.swing.JFrame {
                 if(!(Integer.parseInt(jTextField4.getText()) < 1)){
                     datos = new Lista();
                     existe = true;
-                    raiz1 = new Raiz(Integer.parseInt(jTextField4.getText()));
+                    raiz1 = new ArbolB(Integer.parseInt(jTextField4.getText()));
                     JOptionPane.showMessageDialog(this, "se ha creado un nuevo arbol de grado " + jTextField4.getText(), "Novedad", JOptionPane.WARNING_MESSAGE);
                     ya = true;
                 }
@@ -379,7 +379,7 @@ public class Interfaz2 extends javax.swing.JFrame {
                             esta = true;
                         }
                     }    
-                    raiz1.eliminar(jTextField3.getText());
+                    //raiz1.eliminar(jTextField3.getText());
                     if(esta){
                         JOptionPane.showMessageDialog(this, "El elemento " + jTextField3.getText() + " fue eliminado exitosamente", "Novedad", JOptionPane.WARNING_MESSAGE);
                     }
