@@ -54,6 +54,34 @@ public class Controller {
         this.matriculados = matriculados;
     }
     
+    //comparacion de arraylist
+    public ArrayList compareReference(ArrayList referenceOne, ArrayList referenceTwo){
+        ArrayList coincidencias = null;
+        for (int i = 0; i < 10; i++) {  //recorrer el arraylist
+            if (true) {     //si son iguales
+                //lo guardo en coincidencias
+            }
+        }
+        return coincidencias;
+    }
+    
+    //impresion en jTable
+    public void imprimirEnTabla(DefaultTableModel modelito, ArrayList referencias) throws Exception{
+        modelito.setColumnCount(0);
+        modelito.setRowCount(0);
+        modelito.addColumn("Nombre");
+        modelito.addColumn("Profesión");
+        modelito.addColumn("Promedio");
+        String[] flecha = new String[3];
+        ArrayList tempArray = referencias;
+        for(int i=0; i<tempArray.size(); i++){
+            flecha[0]=matriculados.obt((int) tempArray.get(i)).getEgresado().getNombre() ;
+            flecha[1]=matriculados.obt((int) tempArray.get(i)).getEgresado().getProfesion();
+            flecha[2]=matriculados.obt((int) tempArray.get(i)).getEgresado().getPromedio()+"";
+            modelito.addRow(flecha);
+        }
+    }
+    
     //*********************************arbol ABB********************************
     
     public void crearArbolesABB() throws Exception{
@@ -91,10 +119,10 @@ public class Controller {
         return arbolitoABBPromedio;
     }
     
-    public void treeABBCreatedSearch(String nombre, ArbolABB arbolito, DefaultTableModel modelito) throws Exception{
+    public ArrayList treeABBCreatedSearch(String nombre, ArbolABB arbolito) throws Exception{
+        ArrayList tempArray = null;
         try{
             String cadena = "";
-            ArrayList tempArray;
             tempArray = arbolito.buscar(nombre);
             for (int i = 0; i < tempArray.size(); i++) {
                 cadena += tempArray.get(i) + " ";
@@ -104,23 +132,12 @@ public class Controller {
                 System.out.println(matriculados.obt((int)tempArray.get(i)).getEgresado().getNombre() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getProfesion() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getPromedio());
             }
             System.out.println("");
-            
-            //impresion en tabla
-            modelito.addColumn("Nombre");
-            modelito.addColumn("Profesión");
-            modelito.addColumn("Promedio");
-            String[] flecha = new String[3];
-            tempArray = arbolito.buscar(nombre);
-            for(int i=0; i<tempArray.size(); i++){
-                flecha[0]=matriculados.obt((int) tempArray.get(i)).getEgresado().getNombre() ;
-                flecha[1]=matriculados.obt((int) tempArray.get(i)).getEgresado().getProfesion();
-                flecha[2]=matriculados.obt((int) tempArray.get(i)).getEgresado().getPromedio()+"";
-                modelito.addRow(flecha);
-            }
+            return tempArray;
         }
         catch(Exception e){
             System.out.println(nombre + " no fue encontrado");
         }   
+        return tempArray;
     }
     
     //***********************************arbol AVL********************************************
@@ -159,10 +176,10 @@ public class Controller {
         return arbolitoAVLPromedio;
     }
     
-    public void treeAVLCreatedSearch(String nombre, ArbolAVL arbolito, DefaultTableModel modelito) throws Exception{
+    public ArrayList treeAVLCreatedSearch(String nombre, ArbolAVL arbolito) throws Exception{
+        ArrayList tempArray = null;
         try{
             String cadena = "";
-            ArrayList tempArray;
             tempArray = arbolito.buscar(nombre);
             for (int i = 0; i < tempArray.size(); i++) {
                 cadena += tempArray.get(i) + " ";
@@ -172,23 +189,12 @@ public class Controller {
                 System.out.println(matriculados.obt((int)tempArray.get(i)).getEgresado().getNombre() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getProfesion() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getPromedio());
             }
             System.out.println("");
-            
-            //impresion en tabla
-            modelito.addColumn("Nombre");
-            modelito.addColumn("Profesión");
-            modelito.addColumn("Promedio");
-            String[] flecha = new String[3];
-            tempArray = arbolito.buscar(nombre);
-            for(int i=0; i<tempArray.size(); i++){
-                flecha[0]=matriculados.obt((int) tempArray.get(i)).getEgresado().getNombre() ;
-                flecha[1]=matriculados.obt((int) tempArray.get(i)).getEgresado().getProfesion();
-                flecha[2]=matriculados.obt((int) tempArray.get(i)).getEgresado().getPromedio()+"";
-                modelito.addRow(flecha);
-            }
+            return tempArray;
         }
         catch(Exception e){
             System.out.println(nombre + " no fue encontrado");
         }   
+        return tempArray;
     }
     
     //***********************************arbol B********************************************
@@ -226,35 +232,26 @@ public class Controller {
         return arbolitoBPromedio;
     }
     
-    public void treeBCreatedSearch(String nombre, ArbolB arbolito, DefaultTableModel modelito) throws Exception{
+    public ArrayList treeBCreatedSearch(String nombre, ArbolB arbolito) throws Exception{
+        ArrayList tempArray = null;
         try{
             String cadena = "";
-            ArrayList tempArray;
             tempArray = arbolito.buscar(nombre);
+            //muestra indices del arraylist
             for (int i = 0; i < tempArray.size(); i++) {
                 cadena += tempArray.get(i) + " ";
             }
             System.out.println(cadena);
+            //imprime las referencias de la lista ligada con los arraylist
             for (int i = 0; i < tempArray.size(); i++) {
                 System.out.println(matriculados.obt((int)tempArray.get(i)).getEgresado().getNombre() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getProfesion() + ", " + matriculados.obt((int)tempArray.get(i)).getEgresado().getPromedio());
             }
             System.out.println("");
-            
-            //impresion en tabla
-            modelito.addColumn("Nombre");
-            modelito.addColumn("Profesión");
-            modelito.addColumn("Promedio");
-            String[] flecha = new String[3];
-
-            for(int i=0; i<tempArray.size(); i++){
-                flecha[0]=matriculados.obt((int) tempArray.get(i)).getEgresado().getNombre() ;
-                flecha[1]=matriculados.obt((int) tempArray.get(i)).getEgresado().getProfesion();
-                flecha[2]=matriculados.obt((int) tempArray.get(i)).getEgresado().getPromedio()+"";
-                modelito.addRow(flecha);
-            }
+            return tempArray;
         }
         catch(Exception e){
             System.out.println(nombre + " no fue encontrado");
         }   
+        return tempArray;
     }
 }

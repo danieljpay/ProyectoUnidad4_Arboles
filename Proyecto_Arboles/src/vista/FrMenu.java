@@ -5,8 +5,10 @@
  */
 package vista;
 
+import arboles.ArbolB;
 import controller.Controller;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -271,52 +273,93 @@ public class FrMenu extends javax.swing.JFrame {
         if (datosCargados) {
             modeloCoincidencias.setColumnCount(0);
             modeloCoincidencias.setRowCount(0);
+            ArrayList referenciasUno = new ArrayList();
+            ArrayList referenciasDos = new ArrayList();
+            ArrayList referenciasTres = new ArrayList();
             String busqueda = "";
+            String busquedaDos= "";
             try {
-                if(rbName.isSelected()){
+                if(rbName.isSelected()){    //busqueda nombre
                     busqueda = txtName.getText();
                     switch (arbolPreferido) {
                         case 0:
-                            controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBNombres(), modeloCoincidencias);
+                            referenciasUno = controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBNombres());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                         case 1:
-                            controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLNombres(), modeloCoincidencias);
+                            referenciasUno = controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLNombres());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                         case 2:
-                            controlador.treeBCreatedSearch(busqueda, controlador.getArbolBNombres(), modeloCoincidencias);
+                            referenciasUno = controlador.treeBCreatedSearch(busqueda, controlador.getArbolBNombres());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                     }
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
-                else if(rbAverage.isSelected()){
+                else if(rbAverage.isSelected()){    //busqueda promedio
                     busqueda = txtAverage.getText();
                     switch (arbolPreferido) {
                         case 0:
-                            controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBPromedio(), modeloCoincidencias);
+                            referenciasUno = controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBPromedio());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                         case 1:
-                            controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLPromedio(), modeloCoincidencias);
+                            referenciasUno = controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLPromedio());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                         case 2:
-                            controlador.treeBCreatedSearch(busqueda, controlador.getArbolBPromedio(), modeloCoincidencias);
+                            referenciasUno = controlador.treeBCreatedSearch(busqueda, controlador.getArbolBPromedio());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                     }
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
-                else if (rbDegree.isSelected()) {
+                else if (rbDegree.isSelected()) {   //busqueda profesion
                     busqueda = txtDegree.getText();
                     switch (arbolPreferido) {
                         case 0:
-                            controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBProfesion(), modeloCoincidencias);
+                            referenciasUno = controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBProfesion());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                         case 1:
-                            controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLProfesion(), modeloCoincidencias);
+                            referenciasUno = controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLProfesion());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                         case 2:
-                            controlador.treeBCreatedSearch(busqueda, controlador.getArbolBProfesion(), modeloCoincidencias);
+                            referenciasUno = controlador.treeBCreatedSearch(busqueda, controlador.getArbolBProfesion());
+                            controlador.imprimirEnTabla(modeloCoincidencias, referenciasUno);
                             break;
                     }
                     tbCoincidences.setModel(modeloCoincidencias);
+                }
+                else if (rbName.isSelected() && rbAverage.isSelected()) {   //busqueda nombre y promedio
+                    busqueda = txtName.getText();
+                    busquedaDos = txtAverage.getText();
+                    switch (arbolPreferido) {
+                        case 0:
+                            referenciasUno = controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBProfesion());
+                            
+                            break;
+                        case 1:
+                            referenciasUno = controlador.treeAVLCreatedSearch(busqueda, controlador.getArbolAVLProfesion());
+                            
+                            break;
+                        case 2:
+                            referenciasUno = controlador.treeBCreatedSearch(busqueda, controlador.getArbolBProfesion());
+                            
+                            break;                    
+                    }
+                    tbCoincidences.setModel(modeloCoincidencias);
+                }
+                else if (rbName.isSelected() && rbDegree.isSelected()){ //busqueda nombre y profesion
+                    
+                }
+                else if (rbAverage.isSelected() && rbDegree.isSelected()){ //busqueda promedio y profesion
+                    
+                }
+                else if (rbName.isSelected() && rbAverage.isSelected() && rbDegree.isSelected()){ //busqueda nombre, promedio y profesion
+                    
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda");
