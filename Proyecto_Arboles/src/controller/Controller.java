@@ -54,23 +54,6 @@ public class Controller {
         this.matriculados = matriculados;
     }
     
-    //jTable
-    /*public void imprimirEnTabla(DefaultTableModel modelito, String nombre, ArbolABB arbolito) throws Exception{
-        modelito.setColumnCount(0);
-        modelito.setRowCount(0);
-        modelito.addColumn("Nombre");
-        modelito.addColumn("Profesión");
-        modelito.addColumn("Promedio");
-        String[] flecha = new String[3];
-        ArrayList tempArray = arbolito.buscar(nombre);
-        for(int i=0; i<tempArray.size(); i++){
-            flecha[0]=matriculados.obt((int) tempArray.get(i)).getEgresado().getNombre() ;
-            flecha[1]=matriculados.obt((int) tempArray.get(i)).getEgresado().getProfesion();
-            flecha[2]=matriculados.obt((int) tempArray.get(i)).getEgresado().getPromedio()+"";
-            modelito.addRow(flecha);
-        }
-    }*/
-    
     //*********************************arbol ABB********************************
     
     public void crearArbolesABB() throws Exception{

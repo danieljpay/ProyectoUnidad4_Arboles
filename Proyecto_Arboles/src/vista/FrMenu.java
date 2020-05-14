@@ -25,9 +25,6 @@ public class FrMenu extends javax.swing.JFrame {
         initComponents();
         this.controlador = controlador;
         this.setLocationRelativeTo(null);
-        searchOptions.add(rbName);
-        searchOptions.add(rbAverage);
-        searchOptions.add(rbDegree);
         modeloCoincidencias = new DefaultTableModel();
         tbCoincidences.setModel(modeloCoincidencias);
     }
@@ -41,7 +38,6 @@ public class FrMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        searchOptions = new javax.swing.ButtonGroup();
         rbName = new javax.swing.JRadioButton();
         rbAverage = new javax.swing.JRadioButton();
         rbDegree = new javax.swing.JRadioButton();
@@ -372,7 +368,6 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbAverage;
     private javax.swing.JRadioButton rbDegree;
     private javax.swing.JRadioButton rbName;
-    private javax.swing.ButtonGroup searchOptions;
     private javax.swing.JTable tbCoincidences;
     private javax.swing.JTextField txtAverage;
     private javax.swing.JTextField txtDegree;
