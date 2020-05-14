@@ -21,26 +21,23 @@ public class ArbolB
     public static int nivel = 1;
     public static int imprimir = 1;
     public static String arbol = "";
-    public ArrayList<Integer> tempArray = new ArrayList<Integer>();
     public ArrayList<String> ingresados = new ArrayList<String>();
-    public ArrayList<ArrayList<Integer>> referencias = new ArrayList<ArrayList<Integer>>();
-    int indexRef = 0;
+    public ArrayList<ArrayList> referencias = new ArrayList<ArrayList>();
     
     public ArbolB(int grado){
         this.grado = grado;
         primerNodo = new Nodo ();
-        Lista llevarIngresos = new Lista();
         esRaiz = true;
     }
     
     public void insertar (String valor, int n) {
+        ArrayList tempArray = new ArrayList();
         boolean adentro = false;
         for (int i = 0; i < ingresados.size(); i++) {
             if(valor.compareTo(ingresados.get(i)) == 0){
                 tempArray = referencias.get(i);
                 tempArray.add(n);
                 referencias.set(i, tempArray);
-                tempArray.clear();
                 adentro=true;
             }
         }
@@ -53,7 +50,6 @@ public class ArbolB
                        ingresados.add(valor);
                        tempArray.add(n);
                        referencias.add(tempArray);    //aqui esta el error que no me deja crear el arbol
-                       tempArray.clear();
                        j = i;
                        ordenar(primerNodo.valores,6);
                        break;
@@ -119,6 +115,7 @@ public class ArbolB
     
     public void ubicarValorEnArreglo(Nodo nodoA, String valor, int n){
         int cont = 0;
+        ArrayList tempArray = new ArrayList();
         while(cont <= 2*grado){
             if (nodoA.valores[cont] == null) { 
                 nodoA.valores[cont]=valor;
@@ -126,7 +123,6 @@ public class ArbolB
                 ingresados.add(valor);
                 tempArray.add(n);
                 referencias.add(tempArray);
-                tempArray.clear();
                 if (cont == 2*grado) {
                     split(nodoA);
                 }
@@ -229,8 +225,8 @@ public class ArbolB
         }
     }
       
-    public ArrayList<Integer> buscar(String valor){
-        ArrayList<Integer> encontrados = null;
+    public ArrayList buscar(String valor){
+        ArrayList encontrados = null;
         boolean esta = false;
         for(int i = 0; i < ingresados.size(); i++){
             if(ingresados.get(i).compareTo(valor) == 0){

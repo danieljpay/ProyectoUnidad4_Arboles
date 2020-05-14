@@ -262,7 +262,7 @@ public class Controller {
             modelito.addColumn("Profesión");
             modelito.addColumn("Promedio");
             String[] flecha = new String[3];
-            tempArray = arbolito.buscar(nombre);
+
             for(int i=0; i<tempArray.size(); i++){
                 flecha[0]=matriculados.obt((int) tempArray.get(i)).getEgresado().getNombre() ;
                 flecha[1]=matriculados.obt((int) tempArray.get(i)).getEgresado().getProfesion();
