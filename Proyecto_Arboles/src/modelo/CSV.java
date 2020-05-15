@@ -28,7 +28,7 @@ public class CSV {
             //salta linea de titulos
             linea = bufferLectura.readLine();
             
-            //si tiene titulos los saltará (version Beta)
+            //Detecta si tiene encabezados el csv (version Beta)
             /*String[] titulos = linea.split(separator);
             if(titulos[0].compareTo("Nombre") == 0 || titulos[0].compareTo("Nombres") == 0 || titulos[0].compareTo("nombre") == 0 || titulos[0].compareTo("nombres") == 0 || titulos[1].compareTo("Profesion") == 0 || titulos[1].compareTo("Profesión") == 0 || titulos[1].compareTo("profesion") == 0 || titulos[1].compareTo("profesión") == 0 || titulos[2].compareTo("Promedio") == 0 || titulos[1].compareTo("promedio") == 0){
                 linea = bufferLectura.readLine();

@@ -24,19 +24,19 @@ public class ArbolABB {
         }    
     }
   
-  public void posOrden(){
-    if(raiz!=null)
-        raiz.posOrden();
-  }
+    public void posOrden(){
+        if(raiz!=null)
+            raiz.posOrden();
+    }
   
-  public void preOrden(){
-    if(raiz!=null)
-        raiz.preOrden();        
-  }
+    public void preOrden(){
+        if(raiz!=null)
+            raiz.preOrden();        
+    }
   
-  public void insertar(String o, int n){
-    insertarOrdenado(raiz,o, n);
-  }
+    public void insertar(String o, int n){
+        insertarOrdenado(raiz,o, n);
+    }
   
   public void borrar(String o){
     borrar(raiz,o);
@@ -66,20 +66,21 @@ public class ArbolABB {
    return n;     
   }
   
-  private NodoBin buscarMin(NodoBin n){
-     while(n.getIzq()!=null)
-         n = n.getIzq();
-     return n;
-  }
-  
-  private NodoBin borrarMin(NodoBin n){
-    if (n.getIzq()!= null){
-      n.setIzq(borrarMin(n.getIzq()));
-      return n;
+    private NodoBin buscarMin(NodoBin n){
+        while(n.getIzq()!=null)
+            n = n.getIzq();
+        return n;
     }
-    else 
-       return n.getDer();
-  }
+  
+    private NodoBin borrarMin(NodoBin n){
+        if (n.getIzq()!= null){
+            n.setIzq(borrarMin(n.getIzq()));
+            return n;
+        }
+        else{
+           return n.getDer(); 
+        }
+    }
   
     private void insertarOrdenado(NodoBin n, String o, int b){
         if(o.compareTo( n.getDato() ) == 0){
@@ -100,7 +101,7 @@ public class ArbolABB {
                 else{
                     insertarOrdenado(n.getDer(),o, b);
                 }
-            }  
+            }
         }
     }
   

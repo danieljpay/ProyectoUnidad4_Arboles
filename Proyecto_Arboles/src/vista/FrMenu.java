@@ -5,7 +5,6 @@
  */
 package vista;
 
-import arboles.ArbolB;
 import controller.Controller;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -229,7 +228,7 @@ public class FrMenu extends javax.swing.JFrame {
             datosCargados=controlador.getDatos().confirmacionDatosCargados();
         } 
         catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudieron cargar los datos, revisa la ruta");
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar los datos, revisa la ruta", "Error en archivos", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoadDataActionPerformed
 
@@ -279,7 +278,7 @@ public class FrMenu extends javax.swing.JFrame {
                         throw new EmptyFieldException("Campos vacíos");
                     }
                     busqueda = txtName.getText();
-                    busquedaDos = txtAverage.getText();
+                    busquedaDos = Float.parseFloat(txtAverage.getText()) + "";
                     busquedaTres = txtDegree.getText();
                     switch (arbolPreferido) {
                         case 0:
@@ -314,7 +313,7 @@ public class FrMenu extends javax.swing.JFrame {
                         throw new EmptyFieldException("Campos vacíos");
                     }
                     busqueda = txtName.getText();
-                    busquedaDos = txtAverage.getText();
+                    busquedaDos = Float.parseFloat(txtAverage.getText()) + "";
                     switch (arbolPreferido) {
                         case 0:
                             referenciasUno = controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBNombres());
@@ -341,7 +340,7 @@ public class FrMenu extends javax.swing.JFrame {
                     if (txtAverage.getText().compareTo("") == 0 || txtDegree.getText().compareTo("") == 0) {
                         throw new EmptyFieldException("Campos vacíos");
                     }
-                    busqueda = txtAverage.getText();
+                    busqueda = Float.parseFloat(txtAverage.getText()) + "";
                     busquedaDos = txtDegree.getText();
                     switch (arbolPreferido) {
                         case 0:
@@ -418,7 +417,7 @@ public class FrMenu extends javax.swing.JFrame {
                     if (txtAverage.getText().compareTo("") == 0) {
                         throw new EmptyFieldException("Campos vacíos");
                     }
-                    busqueda = txtAverage.getText();
+                    busqueda = Float.parseFloat(txtAverage.getText()) + "";
                     switch (arbolPreferido) {
                         case 0:
                             referenciasUno = controlador.treeABBCreatedSearch(busqueda, controlador.getArbolABBPromedio());
