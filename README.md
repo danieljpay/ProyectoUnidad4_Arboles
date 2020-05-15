@@ -22,20 +22,20 @@ Solo tendrás que ejecutar el .jar que se encuentra en el repositorio (lo puedes
 ## ¿Cómo contribuir?
 El programa tiene un error el cual no se halló la forma de arreglar
 Si se le comenta la siguiente línea que se encuentra en la clase CSV:
-´´
+``
 //salta linea de titulos
             linea = bufferLectura.readLine();
-´´
+``
 
 y se le descomentan las siguientes líneas pertenecientes a la misma clase:
 
-´´
+``
 //Detecta si tiene encabezados el csv (version Beta)
             String[] titulos = linea.split(separator);
             if(titulos[0].compareTo("Nombre") == 0 || titulos[0].compareTo("Nombres") == 0 || titulos[0].compareTo("nombre") == 0 || titulos[0].compareTo("nombres") == 0 || titulos[1].compareTo("Profesion") == 0 || titulos[1].compareTo("Profesión") == 0 || titulos[1].compareTo("profesion") == 0 || titulos[1].compareTo("profesión") == 0 || titulos[2].compareTo("Promedio") == 0 || titulos[1].compareTo("promedio") == 0){
                 linea = bufferLectura.readLine();
             }
-´´
+``
 
 El programa es capaz de detectar si el CSV tiene encabezados y si los detecta se saltará esa linea para que comience a leer el contenido, es decir, los datos.
 El problema está en que si se le ingresa un CSV que la primera linea **no** sea de encabezados (nombres, promedio, profesión) este hará la lectura correctamente del CSV, sin embargo, tendrá un problema con el primer dato ingresado; el programa sí hará búsquedas pero tendrá conflicto con el primer dato como por ejemplo que no lo muestre si se le busca o si se repite en algún en el CSV este lo detectará como si fuera distinto, cuando no debería.
