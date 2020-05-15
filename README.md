@@ -39,6 +39,7 @@ y se le descomentan las siguientes líneas pertenecientes a la misma clase:
     }
 
 El programa es capaz de detectar si el CSV tiene encabezados y si los detecta se saltará esa linea para que comience a leer el contenido, es decir, los datos.
+
 El problema está en que si se le ingresa un CSV que la primera linea **no** sea de encabezados (nombres, promedio, profesión) este hará la lectura correctamente del CSV, sin embargo, tendrá un problema con el primer dato ingresado; el programa sí hará búsquedas pero tendrá conflicto con el primer dato como por ejemplo que no lo muestre si se le busca o si se repite en algún en el CSV este lo detectará como si fuera distinto, cuando no debería.
 Si se selecciona el árbol ABB y debuggeas en la función:
 
@@ -47,7 +48,8 @@ Si se selecciona el árbol ABB y debuggeas en la función:
             n.referencia.add(b);
         }
 
-haciendo búsqueda de nombre, por ejemplo "Daniel"
+haciendo búsqueda de nombre, por ejemplo "Daniel".
+
 al comparar el dato Raiz (es decir el nombre "Daniel" del primer dato del CSV) y la repetición del mismo nombre "Daniel", apesar de ser el mismo string, este no detectará que es el mismo y creará otro nodo dentro del árbol con el mismo nombre, es esto lo que causa conflictos en la búsqueda.
 
 **_Esto solo pasa cuando le activas la detección de encabezados y le ingresas un CSV sin encabezados._**
