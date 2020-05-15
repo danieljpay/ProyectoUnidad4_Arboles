@@ -13,7 +13,6 @@ public class CSV {
     boolean cargadoCorrectamente=false;
     
     public void readCSV(String ruta, ListaSimpleLigada destino) throws IOException{
-        /*  fuente:  thttp://www.programandoapasitos.com/2017/04/como-leer-fichero-csv-con-java.htmlhtp://www.programandoapasitos.com/2017/04/como-leer-fichero-csv-con-java.html */
         String separator = ",";
         String nombre;
         String profesion;
@@ -26,8 +25,14 @@ public class CSV {
             //leer una linea del archivo
             String linea = bufferLectura.readLine();
             
-            //se salta una linea para que no lea titulos
+            //salta linea de titulos
             linea = bufferLectura.readLine();
+            
+            //si tiene titulos los saltará (version Beta)
+            /*String[] titulos = linea.split(separator);
+            if(titulos[0].compareTo("Nombre") == 0 || titulos[0].compareTo("Nombres") == 0 || titulos[0].compareTo("nombre") == 0 || titulos[0].compareTo("nombres") == 0 || titulos[1].compareTo("Profesion") == 0 || titulos[1].compareTo("Profesión") == 0 || titulos[1].compareTo("profesion") == 0 || titulos[1].compareTo("profesión") == 0 || titulos[2].compareTo("Promedio") == 0 || titulos[1].compareTo("promedio") == 0){
+                linea = bufferLectura.readLine();
+            }*/
             
             while (linea != null) {
                 //separar la linea leída con el separador definido previamente

@@ -54,12 +54,11 @@ public class FrMenu extends javax.swing.JFrame {
         tbCoincidences = new javax.swing.JTable();
         btnLoadData = new javax.swing.JButton();
         txtName = new javax.swing.JTextField();
-        lbTotalCompares = new javax.swing.JLabel();
         lbDirection = new javax.swing.JLabel();
         txtDirection = new javax.swing.JTextField();
         txtAverage = new javax.swing.JTextField();
         lbCoincidences = new javax.swing.JLabel();
-        lbTimeExecute = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         txtDegree = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,17 +114,14 @@ public class FrMenu extends javax.swing.JFrame {
             }
         });
 
-        lbTotalCompares.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lbTotalCompares.setText("Comparaciones totales:");
-
         lbDirection.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbDirection.setText("Dirección: ");
 
         lbCoincidences.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lbCoincidences.setText("Coincidencias:");
 
-        lbTimeExecute.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        lbTimeExecute.setText("Tiempo de ejecución:");
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
+        jLabel1.setText("plupyt");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,21 +133,23 @@ public class FrMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbDirection)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbQuestionSearch))
-                        .addGap(48, 48, 48)
-                        .addComponent(btnLoadData)
-                        .addContainerGap(222, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(optionsTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCreateTree))
                             .addComponent(lbQuestionTree))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbTitle)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbDirection)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(txtDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbQuestionSearch)))
+                        .addGap(48, 48, 48)
+                        .addComponent(btnLoadData)
+                        .addContainerGap(222, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -172,21 +170,17 @@ public class FrMenu extends javax.swing.JFrame {
                                 .addComponent(btnSearch)))
                         .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTotalCompares)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbTimeExecute)
                             .addComponent(lbCoincidences)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(385, 385, 385)
-                        .addComponent(lbTitle)))
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(lbTitle)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoadData)
                     .addComponent(lbDirection)
@@ -196,7 +190,7 @@ public class FrMenu extends javax.swing.JFrame {
                     .addComponent(lbCoincidences, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbQuestionTree))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(optionsTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,18 +208,14 @@ public class FrMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbDegree)
-                            .addComponent(txtDegree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtDegree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addComponent(btnSearch))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lbTotalCompares)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbTimeExecute)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
 
         pack();
@@ -266,7 +256,7 @@ public class FrMenu extends javax.swing.JFrame {
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Brother, primero ingresa los datos, \n seas mamón", "no te pases de berga", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Primero ingresa los datos", "Datos no registrados", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnCreateTreeActionPerformed
 
@@ -478,7 +468,7 @@ public class FrMenu extends javax.swing.JFrame {
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Brother, primero ingresa los datos, \n seas mamón", "no te pases de berga", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Primero ingresa los datos", "Datos no registrados", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -522,14 +512,13 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnCreateTree;
     private javax.swing.JButton btnLoadData;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCoincidences;
     private javax.swing.JLabel lbDirection;
     private javax.swing.JLabel lbQuestionSearch;
     private javax.swing.JLabel lbQuestionTree;
-    private javax.swing.JLabel lbTimeExecute;
     private javax.swing.JLabel lbTitle;
-    private javax.swing.JLabel lbTotalCompares;
     private javax.swing.JComboBox<String> optionsTree;
     private javax.swing.JRadioButton rbAverage;
     private javax.swing.JRadioButton rbDegree;

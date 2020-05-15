@@ -205,7 +205,7 @@ public class Controller {
         arbolitoBNombres = new ArbolB(3);
         arbolitoBPromedio = new ArbolB(3);
         arbolitoBProfesion = new ArbolB(3);
-        for(int i=0; matriculados.obt(i).getEnlace()!= null; i++){
+        for(int i=1; matriculados.obt(i).getEnlace()!= null; i++){
             arbolitoBNombres.insertar(matriculados.obt(i).getEgresado().getNombre(), i);
             arbolitoBProfesion.insertar(matriculados.obt(i).getEgresado().getProfesion(), i);
             arbolitoBPromedio.insertar(matriculados.obt(i).getEgresado().getPromedio()+"", i);
