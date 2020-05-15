@@ -228,7 +228,7 @@ public class FrMenu extends javax.swing.JFrame {
             datosCargados=controlador.getDatos().confirmacionDatosCargados();
         } 
         catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudieron cargar los datos, revisa la ruta", "Error en archivos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudieron cargar los datos, revisa la ruta", "Error en archivos", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoadDataActionPerformed
 
@@ -250,12 +250,12 @@ public class FrMenu extends javax.swing.JFrame {
                 }
                 JOptionPane.showMessageDialog(this, "El árbol seleccionado ha sido creado", "Árbol creado", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
+                JOptionPane.showMessageDialog(this, "No se pudo crear el árbol");
                 ex.printStackTrace();
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Primero ingresa los datos", "Datos no registrados", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Primero ingresa los datos", "Datos no registrados", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnCreateTreeActionPerformed
 
@@ -456,7 +456,7 @@ public class FrMenu extends javax.swing.JFrame {
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
                 if(!rbName.isSelected() && !rbAverage.isSelected() && !rbDegree.isSelected()){
-                    JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda");
+                    JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda", "Error en búsqueda", JOptionPane.WARNING_MESSAGE);
                 }
             } 
             catch (EmptyFieldException ex1){

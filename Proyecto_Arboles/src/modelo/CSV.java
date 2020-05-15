@@ -56,7 +56,7 @@ public class CSV {
         catch(IOException e){
             System.out.println("No se pudieron cargar los datos\n");
             cargadoCorrectamente = false;
-            JOptionPane.showMessageDialog(null, "No se pudieron cargar los archivos, revisa la ruta");
+            JOptionPane.showMessageDialog(null, "No se pudieron cargar los datos, revisa la ruta \nrecuerda que debes ingresar la ruta con el nombre del archivo\nEjemplo: Documents/nombreDelArchivo.csv", "Error en la busqueda", JOptionPane.ERROR_MESSAGE);
         }
     }
     
