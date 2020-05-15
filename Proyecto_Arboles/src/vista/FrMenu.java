@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.EmptyFieldException;
 
 /**
  *
@@ -258,6 +259,7 @@ public class FrMenu extends javax.swing.JFrame {
                         controlador.crearArbolesB();
                         break;
                 }
+                JOptionPane.showMessageDialog(this, "El árbol seleccionado ha sido creado", "Árbol creado", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "No se pudo crear el árbol");
                 ex.printStackTrace();
@@ -283,6 +285,9 @@ public class FrMenu extends javax.swing.JFrame {
             String busquedaTres = "";
             try {
                 if (rbName.isSelected() && rbAverage.isSelected() && rbDegree.isSelected()){ //busqueda nombre, promedio y profesion
+                    if (txtName.getText().compareTo("") == 0 || txtAverage.getText().compareTo("") == 0|| txtDegree.getText().compareTo("") == 0) {
+                        throw new EmptyFieldException("Campos vacíos");
+                    }
                     busqueda = txtName.getText();
                     busquedaDos = txtAverage.getText();
                     busquedaTres = txtDegree.getText();
@@ -315,6 +320,9 @@ public class FrMenu extends javax.swing.JFrame {
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
                 if (rbName.isSelected() && rbAverage.isSelected() && !rbDegree.isSelected()) {   //busqueda nombre y promedio
+                    if (txtName.getText().compareTo("") == 0 || txtAverage.getText().compareTo("") == 0) {
+                        throw new EmptyFieldException("Campos vacíos");
+                    }
                     busqueda = txtName.getText();
                     busquedaDos = txtAverage.getText();
                     switch (arbolPreferido) {
@@ -340,6 +348,9 @@ public class FrMenu extends javax.swing.JFrame {
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
                 if (rbAverage.isSelected() && rbDegree.isSelected() && !rbName.isSelected()){ //busqueda promedio y profesion
+                    if (txtAverage.getText().compareTo("") == 0 || txtDegree.getText().compareTo("") == 0) {
+                        throw new EmptyFieldException("Campos vacíos");
+                    }
                     busqueda = txtAverage.getText();
                     busquedaDos = txtDegree.getText();
                     switch (arbolPreferido) {
@@ -365,6 +376,9 @@ public class FrMenu extends javax.swing.JFrame {
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
                 if (rbName.isSelected() && rbDegree.isSelected() && !rbAverage.isSelected()){ //busqueda nombre y profesion
+                    if (txtName.getText().compareTo("") == 0 || txtDegree.getText().compareTo("") == 0) {
+                        throw new EmptyFieldException("Campos vacíos");
+                    }
                     busqueda = txtName.getText();
                     busquedaDos = txtDegree.getText();
                     switch (arbolPreferido) {
@@ -390,6 +404,9 @@ public class FrMenu extends javax.swing.JFrame {
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
                 if(rbName.isSelected() && !rbAverage.isSelected() && !rbDegree.isSelected()){    //busqueda nombre
+                    if (txtName.getText().compareTo("") == 0) {
+                        throw new EmptyFieldException("Campos vacíos");
+                    }
                     busqueda = txtName.getText();
                     switch (arbolPreferido) {
                         case 0:
@@ -408,6 +425,9 @@ public class FrMenu extends javax.swing.JFrame {
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
                 if(rbAverage.isSelected() && !rbDegree.isSelected() && !rbName.isSelected()){    //busqueda promedio
+                    if (txtAverage.getText().compareTo("") == 0) {
+                        throw new EmptyFieldException("Campos vacíos");
+                    }
                     busqueda = txtAverage.getText();
                     switch (arbolPreferido) {
                         case 0:
@@ -426,6 +446,9 @@ public class FrMenu extends javax.swing.JFrame {
                     tbCoincidences.setModel(modeloCoincidencias);
                 }
                 if (rbDegree.isSelected() && !rbAverage.isSelected() && !rbName.isSelected()) {   //busqueda profesion
+                    if (txtDegree.getText().compareTo("") == 0) {
+                        throw new EmptyFieldException("Campos vacíos");
+                    }
                     busqueda = txtDegree.getText();
                     switch (arbolPreferido) {
                         case 0:
@@ -446,7 +469,11 @@ public class FrMenu extends javax.swing.JFrame {
                 if(!rbName.isSelected() && !rbAverage.isSelected() && !rbDegree.isSelected()){
                     JOptionPane.showMessageDialog(null, "Revise si tiene marcado un método de búsqueda así como los datos en la búsqueda");
                 }
-            } catch (Exception ex) {
+            } 
+            catch (EmptyFieldException ex1){
+                JOptionPane.showMessageDialog(this, "campos seleccionados están vacíos", "Error en los campos de búsqueda", JOptionPane.ERROR_MESSAGE);
+            }
+            catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, busqueda + " no fue encontrado dentro del árbol");
             }
         }
