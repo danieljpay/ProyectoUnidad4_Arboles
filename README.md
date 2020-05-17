@@ -5,11 +5,9 @@ Unidad4_Arboles > Proyecto
 Se trata de un programa que es capaz de leer un CSV con nombre, promedio y profesion, al leerlo podrá generar un árbol (ABB, AVL o B) con los datos del CSV ingresado; el árbol deseado lo podrá elegir el usuario dentro del programa y podrá hacer búsquedas (multifiltro si se desea) dentro de el árbol seleccionado.
 
 ## La instalación del programa
-Lo único que se necesita es tener instalado java dentro de tu PC (si no lo tiene instalado puede consultar la instalación
-dentro de los archivos del repositorio, lo encuentra como manual de instalación.docx).
-
+Lo único que se necesita es tener instalado java dentro de tu PC (si no lo tiene instalado puede consultar en google la instalación).
 #### Si ya tienes instalado java
-Solo tendrás que ejecutar el .jar que se encuentra en el repositorio (lo puedes buscar en Proyecto_Arboles > dist > Perez_Daniel_ProyectoArboles.jar).
+Solo es copiar todas las clases y ejecutarlo o clonar el repositorio dentro de tu PC.
 
 ## Manual de uso
 1. Ingresar la ruta del archivo CSV en el campo de búsqueda (El CSV deberá tener una linea de encabezados, es decir, Nombre del alumno,  promedio y profesion, en la lineas debajo de los encabezados deberá contener los demás datos).

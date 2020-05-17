@@ -221,7 +221,7 @@ public class FrMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadDataActionPerformed
-        //btnLoadData
+        //**************************************btnLoadData*******************************************
         try {
             controlador.getDatos().readCSV(txtDirection.getText(), controlador.getMatriculados()); 
             txtDirection.setText("");
@@ -233,7 +233,7 @@ public class FrMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoadDataActionPerformed
 
     private void btnCreateTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateTreeActionPerformed
-        //btnCreateTree
+        //*********************************************btnCreateTree*********************************
         if (datosCargados) {
             arbolPreferido = optionsTree.getSelectedIndex();
             try {
@@ -260,7 +260,7 @@ public class FrMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateTreeActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        //btnSearch
+        //**************************************btnSearch*******************************************
         if (datosCargados) {
             modeloCoincidencias.setColumnCount(0);
             modeloCoincidencias.setRowCount(0);
